@@ -1,0 +1,174 @@
+{% url 'contact:contact' as contact_url %}
+
+<!-- SCROLL TOP BUTTON -->
+<a class="scrollToTop" href="#"><i class="fa fa-angle-double-up"></i></a>
+<!-- END SCROLL TOP BUTTON -->
+
+
+
+<!-- Start header section -->
+<header id="aa-header">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="aa-header-area">
+          <div class="row">
+            <div class="col-md-6 col-sm-6 col-xs-6">
+              <div class="aa-header-left">
+                <div class="aa-telephone-no">
+                  <span class="fa fa-phone"></span>
+                  +234 808 186 6333
+                </div>
+                <div class="aa-email hidden-xs">
+                  <span class="fa fa-envelope"></span> earmark.invest@yahoo.com
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-6">
+              <div class="aa-header-right">
+                {% if user.is_authenticated %}
+                <span>
+                  <form method="post" action="{% url 'accounts:logout' %}">
+                    {% csrf_token %}
+                    <button type="submit">Log Out</button>
+                    <a class="aa-profile">
+                      <span><a href="{% url 'accounts:profile' %}">@{{ user.username }}</a></span>
+                    </a>
+                  </form>{% else %}
+
+                  <a class="aa-register">
+                    <span><a href="{% url 'accounts:register' %}">Register</a></span>
+                  </a>
+                  <a class="aa-login">
+                    <span><a href="{% url 'accounts:login' %}">Login</a></span>
+                  </a>
+                  {% endif %}
+
+
+                </span>
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<!-- End header section -->
+
+<!-- Start menu section -->
+<section id="aa-menu-area">
+  <nav class="navbar navbar-default main-navbar navbar" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- FOR MOBILE VIEW COLLAPSED BUTTON -->
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+          aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <!-- LOGO -->
+        <!-- Text based logo -->
+        <a> {% url 'public:index' as index_url %}{% if request.path == index_url %}{% else %}<a
+            class="navbar-brand aa-logo" href="{{ index_url }}"> EARMARK INVESTMENT</a>{% endif %}</span></a>
+        <!-- Image based logo -->
+        <!-- <a class="navbar-brand aa-logo-img" href="index.html"><img src="img/logo.png" alt="logo"></a> -->
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul id="top-menu" class="nav navbar-nav navbar-right aa-main-nav">
+          <span>
+            <li>
+              {% url 'public:index' as index_url %}
+              <span>{% if request.path == index_url %}{% else %}<a href="{{ index_url }}">HOME</a>{% endif %}</span>
+            </li>
+          </span>
+
+          <span>
+            <li>
+              {% url 'public:properties_list' as properties_list_url %}
+              <span>
+                {% if request.path == properties_list_url %}PROPERTIES{% else %}
+                <a href="{{ properties_list_url }}">PROPERTIES
+
+                </a>{%endif %}
+              </span>
+            </li>
+          </span>
+
+          <span>
+            <li>
+              {% url 'public:gallery' as gallery_url %}
+              <span>{% if request.path == gallery_url %}GALLERY{% else %}<a href="{{ gallery_url }}">GALLERY</a>
+                {% endif %}
+
+              </span>
+            </li>
+          </span>
+          <span>
+            <li>
+              {% url 'public:blog' as blog_url %} <span>
+                {% if request.path == blog_url %}BLOG{% else %}<a href="{{ blog_url }}">BLOG</a>{% endif %}</span></a>
+
+            </li>
+          </span>
+          <span>
+            <li>
+
+              <span>{% if request.path == contact_url %}CONTACT{% else %}<a href="{{ contact_url }}">CONTACT</a>
+                {% endif %}
+              </span>
+            </li>
+          </span>
+
+        </ul>
+      </div>
+    </div>
+  </nav>
+</section>
+<!-- End menu section -->
+
+
+
+<!-- <div>
+    {% url 'public:index' as index_url %}
+    <span>{% if request.path == index_url %}Home{% else %}<a href="{{ index_url }}">Home</a>{% endif %}</span>
+    {% url 'public:contact' as contact_url %}
+    <span>{% if request.path == contact_url %}Contact{% else %}<a href="{{ contact_url }}">Contact</a>{% endif %}</span>
+    {% url 'public:blog' as blog_url %}
+    <span>{% if request.path == blog_url %}Blog{% else %}<a href="{{ blog_url }}">Blog</a>{% endif %}</span>
+    {% url 'public:about' as about_url %}
+    <span>{% if request.path == about_url %}About{% else %}<a href="{{ about_url }}">About</a>{% endif %}</span>
+    {% url 'public:properties' as properties_url %}
+    <span>{% if request.path == properties_url %}Properties{% else %}<a href="{{ properties_url }}">Properties</a>{% endif %}</span>
+    {% url 'public:properties_detail' as properties_detail_url %}
+    <span>{% if request.path == properties_detail_url %}Properties Detail{% else %}<a href="{{ properties_detail_url }}">Properties Detail</a>{% endif %}</span>
+    {% url 'public:gallery' as gallery_url %}
+    <span>{% if request.path == gallery_url %}Gallery{% else %}<a href="{{ gallery_url }}">Gallery</a>{% endif %}</span>
+     {% url 'public:blog_archive' as blog_archive_url %}
+    <span>{% if request.path == blog_archive_url %}Blog Details{% else %}<a href="{{ blog_archive_url }}">Blog Details</a>{% endif %}</span>
+    
+    
+    <span style="float:right"> 
+        {% if user.is_authenticated %}
+        {% url 'public:profile' as profile_url%}
+        <span>Hi {% if request.path == profile_url %}{{user.username}}{% else %}<a href="{{profile_url}}">{{user.username}}</a></span>
+        <span>
+            <form method="post" action="{% url 'accounts:logout' %}">
+            {% csrf_token %}
+            <button type="submit">logout</button>
+        </form>
+        {% endif %}
+    </span>
+    {% else %}
+        
+        <span><a href = "{% url 'accounts:login' %}">Login</a></span>
+        <span><a href = "{% url 'accounts:register' %}">Register</a></span>
+        
+
+        {% endif %}
+    </span>
+</div> -->

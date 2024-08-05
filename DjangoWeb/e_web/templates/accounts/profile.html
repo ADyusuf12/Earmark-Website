@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+
+{% block title %}PROFILE{% endblock %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+
+    <body>
+
+        <!-- SCROLL TOP BUTTON -->
+        <a class="scrollToTop" href="#"><i class="fa fa-angle-double-up"></i></a>
+        <!-- END SCROLL TOP BUTTON -->
+
+
+        <!-- Start Property header  -->
+        <section id="aa-property-header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="aa-property-header-inner">
+                            <h2>Profile Page</h2>
+                            <ol class="breadcrumb">
+                                <li>
+                                    {% url 'public:index' as index_url %}{% if request.path == index_url %}{% else %}<a
+                                        href="{{ index_url }}">HOME</a>{% endif %}</span></a>
+                                </li>
+                                <li class="active">Profile</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End Property header  -->
+
+        <div class="aa-profile-content">
+            <section id="aa-profile">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="aa-profile-area">
+                                <div class="aa-profile-bottom">
+                                    <div class="aa-profile-bottom-right">
+                                        <ul class="profile-info-list">
+                                            <h1>{{ user.get_full_name}} (@{{user.username}})</h1>
+                                            {% with profile=user.profile %}
+                                            {% if profile %}
+                                            <h2>{{ profile.persona|default:"" }}</h2>
+                                            <div>{{ profile.bio|default:" "}}</div>
+                                            <div>{% with website=profile.website|default:"" %}</div>
+                                            <a href="{{website}}">{{ website }}></a>
+                                            {% endwith%}
+                                            <br />
+                                            <div>
+                                                Interests:
+                                                {% for interest in profile.interests.all %}
+                                                <span>
+                                                    {{ interest.name }}{% if not forloop.last %}, {% endif %}
+
+                                                </span>
+                                                {% endfor %}
+                                            </div>
+                                            {% endif %}
+                                            {% endwith %}
+
+                                        </ul>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+    </body>
+
+</html>
+
+{% endblock %}

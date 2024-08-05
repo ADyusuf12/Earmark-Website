@@ -1,0 +1,168 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}CONTACT{% endblock %}
+
+{% block content %}
+{% url 'public:index' as index_url %}
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  </head>
+
+  <body>
+
+    <!-- SCROLL TOP BUTTON -->
+    <a class="scrollToTop" href="#"><i class="fa fa-angle-double-up"></i></a>
+    <!-- END SCROLL TOP BUTTON -->
+
+
+    <!-- Start Property header  -->
+    <section id="aa-property-header">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="aa-property-header-inner">
+              <h2>Contact Page</h2>
+              <ol class="breadcrumb">
+                <li>
+                  {% if request.path == index_url %}{% else %}<a href="{{ index_url }}">HOME</a>{% endif %}</span></a>
+                </li>
+                <li class="active">Contact</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End Property header  -->
+
+    <section id="aa-contact">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="aa-contact-area">
+              <div class="aa-contact-top">
+                <div class="aa-contact-top-left">
+                  <iframe width="100%" height="450" frameborder="0" allowfullscreen="" style="border:0"
+                    src="https://www.google.com/maps/@11.9742146,8.5692023,3a,75y,217.76h,77.52t,2.28r/data=!3m7!1e1!3m5!1sSKh_KDaTeJP4H8fWlfsKrA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.googleapis.com%2Fv1%2Fthumbnail%3Fpanoid%3DSKh_KDaTeJP4H8fWlfsKrA%26cb_client%3Dmaps_sv.tactile.gps%26w%3D203%26h%3D100%26yaw%3D224.89384%26pitch%3D0%26thumbfov%3D100!7i13312!8i6656?coh=205409&entry=ttu"></iframe>
+                </div>
+                <div class="aa-contact-top-right">
+                  <h2>Contact</h2>
+                  <p>Property Management & Investment Company</p>
+                  <ul class="contact-info-list">
+                    <li> <i class="fa fa-phone"></i> +234 808 186 6333</li>
+                    <li> <i class="fa fa-envelope-o"></i> earmarkinvest@yahoo.com</li>
+                    <li> <i class="fa fa-facebook"></i>Follow us on Facebook: <a
+                        href="https://www.facebook.com/earmarkinvest">Earmark Investment</a>
+                    </li>
+                    <li> <i class="fa fa-twitter"></i>Follow us on X: <a
+                        href="https://x.com/earmarkinvest">@EarmarkInvest</a>
+                    </li>
+                    <li> <i class="fa fa-instagram"></i>Follow us on Instagram: <a
+                        href="https://www.instagram.com/earmarkinvest">@earmarkinvest</a>
+                    </li>
+                    <li> <i class="fa fa-map-marker"></i> Kano: No. 7 Maiduguri Road, opposite Sani Marshall Residence,
+                      Hotoro GRA, Kano, Nigeria, 700223</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="aa-contact-bottom">
+                <div class="aa-title">
+                  <h2>Send Your Message</h2>
+                  <span></span>
+                  <p>Your email address will not be published. Required fields are marked <strong
+                      class="required">*</strong></p>
+                </div>
+                <!-- FORM -->
+
+                <div class="aa-contact-form">
+
+                  {% if success %}
+                  <div class="alert alert-success" role="alert">
+                    Message sent succesfully!
+                  </div>
+
+                  {% endif %}
+
+
+                  <form class="contactform" method="post">
+                    {% csrf_token %}
+
+                    {% if form.non_field_errors %}
+                    <div class="alert alert-success" role="alert">
+                      {{ form.non_field_errors }}
+                    </div>
+
+                    {% endif %}
+
+                    {% for field in form %}
+
+                    <p class="comment-form-author">
+                      {{ field.label_tag }}
+                      {{ field }}
+
+
+                    </p>
+                    {% endfor %}
+
+                    <p class="form-submit">
+                      <input type="submit" name="submit" class="aa-browse-btn" value="Send Message">
+                    </p>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- Footer -->
+    <footer id="aa-footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="aa-footer-area">
+              <div class="row">
+                <!-- <div class="col-md-3 col-sm-6 col-xs-12">
+              <div class="aa-footer-left">
+               <p>Designed by <a rel="nofollow" href="http://www.markups.io/">MarkUps.io</a></p>
+              </div>
+            </div> -->
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                  <div class="aa-footer-middle">
+                    <a href="https://www.facebook.com/earmarkinvest"><i class="fa fa-facebook"></i></a>
+                    <a href="https://x.com/earmarkinvest"><i class="fa fa-twitter"></i></a>
+                    <a href="https://www.instagram.com/earmarkinvest"><i class="fa fa-instagram"></i></a>
+                    <!-- <a href="#"><i class="fa fa-google-plus"></i></a>
+ --> <!-- <a href="#"><i class="fa fa-youtube"></i></a> -->
+                  </div>
+                </div>
+                <div class="col-md-6 col-sm-12 col-xs-12">
+                  <div class="aa-footer-right">
+                    <a href="#">Home</a>
+                    <a href="#">Support</a>
+                    <a href="#">License</a>
+                    <a href="#">FAQ</a>
+                    <a href="#">Privacy & Term</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+  </body>
+
+</html>
+
+{% endblock %}
