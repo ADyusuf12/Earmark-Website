@@ -22,21 +22,39 @@
                         <div class="aa-signin-area">
                             <div class="aa-signin-form">
                                 <div class="aa-signin-form-title">
-                                    <a class="aa-property-home" href="index.html">Property Home</a>
-                                    <h4>Sign in to your account</h4>
+                                    <h1>Sign in to your account</h1>
                                 </div>
                                 <form class="contactform" method="post">
                                     {% csrf_token %}
-                                    {{ form.label }}
-                                    {{ form }}
-                                    <button type="submit">Sign In</button>
+
+                                    <div class="aa-single-field">
+                                        {{ form.username.label}}
+                                        {{ form.username }}
+                                    </div>
+
+                                    <div class="aa-single-field">
+                                        {{form.password.label}}
+                                        {{form.password}}
+                                    </div>
+
+                                    <div class="aa-single-field">
+                                        <label>
+                                            <input type="checkbox"> Remember me
+                                        </label>
+                                    </div>
+
+                                    <div class="aa-single-submit">
+                                        <input type="submit" value="Sign In" class="aa-browse-btn" name="submit">
+                                        <p>Don't Have An Account Yet? <span><a
+                                                    href="{% url 'accounts:register' %}">CREATE
+                                                    NOW</a></span></p>
+                                    </div>
                                 </form>
 
 
-                                <p>Don't Have An Account Yet? <span><a href="{% url 'public:register' %}">CREATE
-                                            NOW</a></span></p>
+
                             </div>
-                            </form>
+
                         </div>
                     </div>
                 </div>
