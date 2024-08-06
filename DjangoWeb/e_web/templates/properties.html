@@ -87,11 +87,13 @@
               </div>
               <!-- Start properties content body -->
               {% for listing in listings %}
+              {{listing.as_ul}}
 
               <div class="aa-properties-content-body">
                 <span class="aa-properties-nav">
                   <li>
                     <article class="aa-properties-item">
+
                       <a class="aa-properties-item-img" href="#">
                         <img alt="img" src="{{ listing.image.url }}">
                       </a>
@@ -126,6 +128,7 @@
 
                         </div>
                       </div>
+
                     </article>
                     {% endfor %}
                   </li>

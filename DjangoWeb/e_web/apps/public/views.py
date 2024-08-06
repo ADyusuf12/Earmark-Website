@@ -7,7 +7,11 @@ from .forms import Properties_ListingForm
 
 
 def index(request):
-    return render(request, 'index.html')
+    listings = Properties_Listing.objects.order_by('id')
+    context = {
+        "listings": listings
+    }
+    return render(request, 'index.html', context)
 
 def blog(request):
     return render(request, 'blog.html')

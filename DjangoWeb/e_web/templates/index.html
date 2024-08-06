@@ -314,181 +314,52 @@
             <span></span>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum sit ea nobis quae vero voluptatibus.</p>
           </div>
+
+
           <div class="aa-latest-properties-content">
+
             <div class="row">
+
+
               <div class="col-md-4">
+                {% for listing in listings %}
                 <article class="aa-properties-item">
                   <a href="#" class="aa-properties-item-img">
-                    <img src="{% static 'theme/img/item/1.jpg' %}" alt="img">
+
+
+                    <img src="{{ listing.image.url }}" alt="img">
                   </a>
                   <div class="aa-tag for-sale">
-                    For Sale
+                    {{ listing.status }}
                   </div>
                   <div class="aa-properties-item-content">
                     <div class="aa-properties-info">
-                      <span>5 Rooms</span>
-                      <span>2 Beds</span>
-                      <span>3 Baths</span>
-                      <span>1100 SQ FT</span>
+                      <span>{{ listing.bedrooms }} Beds</span>
+                      <span>{{ listing.bathrooms }} Baths</span>
+                      <span>{{ listing.sqm }} sqm</span>
+                      <span>{{ listing.parking_space }} Parking Space</span>
                     </div>
                     <div class="aa-properties-about">
-                      <h3><a href="#">Appartment Title</a></h3>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim molestiae vero ducimus quibusdam
-                        odit vitae.</p>
+                      <h3><a href="#">{{ listing.title }}</a></h3>
+                      <strong>
+                        <i class="fa fa-map-marker"></i>
+                        {{ listing.location }}
+                      </strong>
+                      <p>{{ listing.description}}</p>
                     </div>
                     <div class="aa-properties-detial">
                       <span class="aa-price">
-                        ₦35000
+                        ₦{{ listing.price }}
                       </span>
-                      <a href="#" class="aa-secondary-btn">View Details</a>
+                      <a href="/properties_list/{{ listing.id }}" class="aa-secondary-btn">View Details</a>
+
                     </div>
+
                   </div>
+                  {% endfor %}
+
                 </article>
-              </div>
-              <div class="col-md-4">
-                <article class="aa-properties-item">
-                  <a href="#" class="aa-properties-item-img">
-                    <img src="{% static 'theme/img/item/2.jpg' %}" alt="img">
-                  </a>
-                  <div class="aa-tag for-rent">
-                    For Rent
-                  </div>
-                  <div class="aa-properties-item-content">
-                    <div class="aa-properties-info">
-                      <span>5 Rooms</span>
-                      <span>2 Beds</span>
-                      <span>3 Baths</span>
-                      <span>1100 SQ FT</span>
-                    </div>
-                    <div class="aa-properties-about">
-                      <h3><a href="#">Appartment Title</a></h3>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim molestiae vero ducimus quibusdam
-                        odit vitae.</p>
-                    </div>
-                    <div class="aa-properties-detial">
-                      <span class="aa-price">
-                        ₦11000
-                      </span>
-                      <a href="#" class="aa-secondary-btn">View Details</a>
-                    </div>
-                  </div>
-                </article>
-              </div>
-              <div class="col-md-4">
-                <article class="aa-properties-item">
-                  <a href="#" class="aa-properties-item-img">
-                    <img src="{% static 'theme/img/item/3.jpg' %}" alt="img">
-                  </a>
-                  <div class="aa-tag sold-out">
-                    Sold Out
-                  </div>
-                  <div class="aa-properties-item-content">
-                    <div class="aa-properties-info">
-                      <span>5 Rooms</span>
-                      <span>2 Beds</span>
-                      <span>3 Baths</span>
-                      <span>1100 SQ FT</span>
-                    </div>
-                    <div class="aa-properties-about">
-                      <h3><a href="#">Appartment Title</a></h3>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim molestiae vero ducimus quibusdam
-                        odit vitae.</p>
-                    </div>
-                    <div class="aa-properties-detial">
-                      <span class="aa-price">
-                        ₦15000
-                      </span>
-                      <a href="#" class="aa-secondary-btn">View Details</a>
-                    </div>
-                  </div>
-                </article>
-              </div>
-              <div class="col-md-4">
-                <article class="aa-properties-item">
-                  <a href="#" class="aa-properties-item-img">
-                    <img src="{% static 'theme/img/item/4.jpg' %}" alt="img">
-                  </a>
-                  <div class="aa-tag for-sale">
-                    For Sale
-                  </div>
-                  <div class="aa-properties-item-content">
-                    <div class="aa-properties-info">
-                      <span>5 Rooms</span>
-                      <span>2 Beds</span>
-                      <span>3 Baths</span>
-                      <span>1100 SQ FT</span>
-                    </div>
-                    <div class="aa-properties-about">
-                      <h3><a href="#">Appartment Title</a></h3>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim molestiae vero ducimus quibusdam
-                        odit vitae.</p>
-                    </div>
-                    <div class="aa-properties-detial">
-                      <span class="aa-price">
-                        ₦35000
-                      </span>
-                      <a href="#" class="aa-secondary-btn">View Details</a>
-                    </div>
-                  </div>
-                </article>
-              </div>
-              <div class="col-md-4">
-                <article class="aa-properties-item">
-                  <a href="#" class="aa-properties-item-img">
-                    <img src="{% static 'theme/img/item/5.jpg' %}" alt="img">
-                  </a>
-                  <div class="aa-tag sold-out">
-                    Sold Out
-                  </div>
-                  <div class="aa-properties-item-content">
-                    <div class="aa-properties-info">
-                      <span>5 Rooms</span>
-                      <span>2 Beds</span>
-                      <span>3 Baths</span>
-                      <span>1100 SQ FT</span>
-                    </div>
-                    <div class="aa-properties-about">
-                      <h3><a href="#">Appartment Title</a></h3>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim molestiae vero ducimus quibusdam
-                        odit vitae.</p>
-                    </div>
-                    <div class="aa-properties-detial">
-                      <span class="aa-price">
-                        ₦11000
-                      </span>
-                      <a href="#" class="aa-secondary-btn">View Details</a>
-                    </div>
-                  </div>
-                </article>
-              </div>
-              <div class="col-md-4">
-                <article class="aa-properties-item">
-                  <a href="#" class="aa-properties-item-img">
-                    <img src="{% static 'theme/img/item/6.jpg' %}" alt="img">
-                  </a>
-                  <div class="aa-tag for-rent">
-                    For Rent
-                  </div>
-                  <div class="aa-properties-item-content">
-                    <div class="aa-properties-info">
-                      <span>5 Rooms</span>
-                      <span>2 Beds</span>
-                      <span>3 Baths</span>
-                      <span>1100 SQ FT</span>
-                    </div>
-                    <div class="aa-properties-about">
-                      <h3><a href="#">Appartment Title</a></h3>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim molestiae vero ducimus quibusdam
-                        odit vitae.</p>
-                    </div>
-                    <div class="aa-properties-detial">
-                      <span class="aa-price">
-                        ₦15000
-                      </span>
-                      <a href="#" class="aa-secondary-btn">View Details</a>
-                    </div>
-                  </div>
-                </article>
+
               </div>
             </div>
           </div>
