@@ -2,6 +2,10 @@ from django.shortcuts import render, redirect
 from .models import Properties_Listing
 from .forms import Properties_ListingForm
 
+
+
+
+
 def index(request):
     return render(request, 'index.html')
 

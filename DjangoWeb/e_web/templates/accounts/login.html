@@ -25,21 +25,22 @@
                                     <a class="aa-property-home" href="index.html">Property Home</a>
                                     <h4>Sign in to your account</h4>
                                 </div>
-                                <form class="contactform" method = "post">
+                                <form class="contactform" method="post">
                                     {% csrf_token %}
-                                    {{ form.as_p }}
-                                        <button type="submit">Sign In</button>
+                                    {{ form.label }}
+                                    {{ form }}
+                                    <button type="submit">Sign In</button>
                                 </form>
-                                    
-                
-                                        <p>Don't Have An Account Yet? <span><a
-                                                    href="{% url 'accounts:register' %}">CREATE NOW</a></span></p>
-                                    </div>
-                                </form>
+
+
+                                <p>Don't Have An Account Yet? <span><a href="{% url 'public:register' %}">CREATE
+                                            NOW</a></span></p>
                             </div>
+                            </form>
                         </div>
                     </div>
                 </div>
+            </div>
             </div>
         </section>
 

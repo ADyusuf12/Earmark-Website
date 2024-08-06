@@ -16,6 +16,7 @@ urlpatterns = [
     path('update-listing/<int:pk>/', views.properties_list_update, name="update listing"),
     path('delete-listing/<int:pk>/', views.deleteListing, name="delete-listing"),
     
+    
 ]
 
 if settings.DEBUG:
