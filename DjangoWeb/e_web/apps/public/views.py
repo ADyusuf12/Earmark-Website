@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 from .models import Properties_Listing
 from .forms import Properties_ListingForm
 
@@ -37,6 +38,7 @@ def properties_list_retrieve(request, pk):
     }
     return render(request, 'properties-detail.html', context)
 
+@login_required(redirect_field_name="accounts/login")
 def properties_list_create(request):
     form = Properties_ListingForm()
     if request.method == "POST":
@@ -50,6 +52,7 @@ def properties_list_create(request):
     }
     return render(request, 'create.html', context)
 
+@login_required(redirect_field_name="accounts/login")
 def properties_list_update(request, pk):
     listing = Properties_Listing.objects.get(id=pk)
     form = Properties_ListingForm(instance=listing)
@@ -65,6 +68,7 @@ def properties_list_update(request, pk):
     }
     return render(request, 'update.html', context)
 
+@login_required(redirect_field_name="accounts/login")
 def deleteListing(request, pk):
     listing = Properties_Listing.objects.get(id=pk)
     listing.delete()
