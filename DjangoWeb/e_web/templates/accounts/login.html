@@ -28,11 +28,13 @@
                                     {% csrf_token %}
 
                                     <div class="aa-single-field">
+                                        <span class="fa fa-user"></span>
                                         {{ form.username.label}}
                                         {{ form.username }}
                                     </div>
 
                                     <div class="aa-single-field">
+                                        <span class="fa fa-key"></span>
                                         {{form.password.label}}
                                         {{form.password}}
                                     </div>
@@ -49,6 +51,7 @@
                                                     href="{% url 'accounts:register' %}">CREATE
                                                     NOW</a></span></p>
                                     </div>
+                                    <h4> {{ form.errors}} </h4>
                                 </form>
 
 
