@@ -32,3 +32,5 @@ class UserProfile(models.Model):
     persona = models.ForeignKey(UserPersona, on_delete=models.SET_NULL, blank=True, null=True)
     interests = models.ManyToManyField(UserInterest, blank=True)
     
+    
+    

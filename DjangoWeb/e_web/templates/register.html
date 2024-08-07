@@ -52,6 +52,7 @@
                 <div class="aa-signin-form-title">
 
                   <h4>Create your account and Stay with us</h4>
+                  <h4> {{ form.errors}} </h4>
                 </div>
 
 
@@ -92,19 +93,34 @@
                     {{form.password2.label}}
                     {{form.password2}}
                   </div>
-                  <div class="aa-single-submit">
-                    <input type="submit" value="Create Account" name="submit">
-                    <p>Already Have an Account? <span><a href="{% url 'accounts:login' %}">Login
-                          NOW</a></span></p>
-                  </div>
-                  <h4> {{ form.errors}} </h4>
-                </form>
 
-                <!-- FORM ENDS  -->
+                  <div class="aa-single-field">
+                    <span class="fa fa-user"></span>
+                    <label>Account Type</label>
+                    <select>
+                      <option value="1" selected>{{form.groups.0}}</option>
+                      <option value="2" selected>{{form.groups.1}}</option>
+                      <option value="3" selected>{{form.groups.2}}</option>
+                      <option value="4" selected>{{form.groups.3}}</option>
+                      <option value="5" selected>{{form.groups.4}}</option>
+                      <option value="6" selected>{{form.groups.5}}</option>
+                    </select>
+                  </div>
+
               </div>
+              <div class="aa-single-submit">
+                <input type="submit" value="Create Account" class="aa-browse-btn" name="submit">
+                <h3>Already Have an Account? <span><a href="{% url 'accounts:login' %}">LOGIN
+                      NOW</a></span></h3>
+              </div>
+
+              </form>
+
+              <!-- FORM ENDS  -->
             </div>
           </div>
         </div>
+      </div>
       </div>
     </section>
 
