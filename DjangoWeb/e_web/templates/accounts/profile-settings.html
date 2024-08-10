@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+
+{% block title %}PROFILE SETTINGS{% endblock %}
+{% load static %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+
+    <body>
+
+        <!-- SCROLL TOP BUTTON -->
+        <a class="scrollToTop" href="#"><i class="fa fa-angle-double-up"></i></a>
+        <!-- END SCROLL TOP BUTTON -->
+
+
+        <!-- Start Property header  -->
+        <section id="aa-property-header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="aa-property-header-inner">
+                            <h2>Profile Settings</h2>
+                            <ol class="breadcrumb">
+                                <li>
+                                    {% url 'public:index' as index_url %}{% if request.path == index_url %}{% else %}<a
+                                        href="{{ index_url }}">HOME</a>{% endif %}</span></a>
+                                </li>
+                                {% if user.is_active %}
+                                <li>
+                                    <span><a href="{% url 'accounts:profile' %}">Back To Profile</a></span>
+                                </li> {% endif %}
+
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End Property header  -->
+
+
+        <div class="header">
+            <h1>Profile Settings</h1>
+        </div>
+        <div class="container">
+            <div class="profile-settings">
+                <h2>Update Profile</h2>
+                {% with profile=user.profile %}
+                {% if profile %}
+
+                <div class="profile-container">
+                    <div class="profile-pic" id="profile-pic">
+                        <!-- Placeholder for profile picture -->
+                        <label for="profile-picture">Profile Picture</label>
+                        <img src="{{ profile.profile_pic.url }}" alt="Profile Picture" id="profile-pic-img">
+                    </div>
+
+                    {% if form.is_multipart %}
+
+
+
+                    <form method="POST" action="" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{form.as_p}}
+
+                        {% endif %}
+
+                        {% endif %}
+                        {% endwith%}
+                        <input type="submit" value="Update" class="aa-browse-btn" name="submit">
+                    </form>
+                </div>
+            </div>
+    </body>
+
+</html>
+
+
+
+
+
+{% endblock%}

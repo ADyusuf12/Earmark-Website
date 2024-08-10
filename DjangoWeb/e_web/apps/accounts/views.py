@@ -1,13 +1,20 @@
 from django.views.generic.base import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
-from .forms import RegisterForm
-from django.contrib.auth.models import Group, User
+from .forms import RegisterForm, ProfileForm
 
 
 
 class ProfileView(LoginRequiredMixin, TemplateView):
     template_name = 'accounts/profile.html'
+
+def ProfileSettings(request):
+    user = request.user.profile
+    form = ProfileForm(instance=user)
+    
+    context = {'form': form}
+    return render(request, 'accounts/profile-settings.html', context)
+
 
 def register(request):
     form = RegisterForm()

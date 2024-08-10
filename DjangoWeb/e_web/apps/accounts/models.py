@@ -7,13 +7,7 @@ class UserInterest(models.Model):
     def __str__(self):
         return self.name
 
-class UserPersona(models.Model):
-    name = models.CharField(max_length=64, unique=True)
-    normalized_name = models.CharField(max_length=64, unique=True)
-    description = models.CharField(max_length = 200)
 
-    def __str__(self):
-        return self.name
 
 
 
@@ -26,11 +20,15 @@ class UserProfile(models.Model):
 
 
     # details
-
+    
+    profile_pic = models.ImageField(null=True, blank=True)
     bio = models.CharField(max_length=500, blank=True, null=True)
+    phone = models.CharField(max_length=64, null=True)
     website = models.URLField(max_length=200, blank=True, null=True)
-    persona = models.ForeignKey(UserPersona, on_delete=models.SET_NULL, blank=True, null=True)
+    
     interests = models.ManyToManyField(UserInterest, blank=True)
+    date_created = models.DateTimeField(auto_now_add=True, null=True)
+
     
     
     

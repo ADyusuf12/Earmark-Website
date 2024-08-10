@@ -29,10 +29,16 @@
                             <h2>Profile Page</h2>
                             <ol class="breadcrumb">
                                 <li>
-                                    {% url 'public:index' as index_url %}{% if request.path == index_url %}{% else %}<a
-                                        href="{{ index_url }}">HOME</a>{% endif %}</span></a>
+                                    {% url 'public:index' as index_url %}{% if request.path == index_url %}{% else %}
+                                    <a href="{{ index_url }}">HOME</a>{% endif %}
                                 </li>
-                                <li class="active">Profile</li>
+                                {% if user.is_active %}
+                                <li>
+                                    <span><a href="{% url 'accounts:profile-settings' %}">Settings</a></span>
+                                </li> {% endif %}
+
+
+
                             </ol>
                         </div>
                     </div>
@@ -51,11 +57,15 @@
                                     <div class="aa-profile-bottom-right">
                                         <ul class="profile-info-list">
                                             <h1>{{ user.get_full_name}} (@{{user.username}})</h1>
+
                                             {% with profile=user.profile %}
                                             {% if profile %}
-                                            <h2>{{ profile.persona|default:"" }}</h2>
+                                            <img class="profile-picture" src="{{ profile.profile_pic.url }}">
+
                                             <div>{{ profile.bio|default:" "}}</div>
                                             <div>{% with website=profile.website|default:"" %}</div>
+                                            <div>{{profile.date_created}}</div>
+                                            <div>{{profile.phone}}</div>
                                             <a href="{{website}}">{{ website }}></a>
                                             {% endwith%}
                                             <br />
