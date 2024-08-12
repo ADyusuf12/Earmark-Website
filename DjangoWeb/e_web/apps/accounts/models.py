@@ -36,6 +36,15 @@ class UserProfile(models.Model):
     interests = models.ManyToManyField(UserInterest, blank=True)
     date_created = models.DateTimeField(auto_now_add=True, null=True)
     
+    def save(self, *args, **kwargs):
+       User.objects.filter(pk=self.user.pk).update(
+            first_name=self.first_name,
+            last_name=self.last_name,
+            email=self.email,
+            username=self.username
+            )
+       super(UserProfile, self).save(*args, **kwargs) 
+    
     def __str__(self):
         return self.user.username
     
