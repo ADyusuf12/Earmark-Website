@@ -56,30 +56,64 @@
                                 <div class="aa-profile-bottom">
                                     <div class="aa-profile-bottom-right">
                                         <ul class="profile-info-list">
-                                            <h1>{{ user.get_full_name}} (@{{user.username}})</h1>
+                                            <h1></h1>
 
                                             {% with profile=user.profile %}
                                             {% if profile %}
-                                            <img class="profile-picture" src="{{ profile.profile_pic.url }}">
+                                            <div class="profile-container">
+                                                <div class="profile-pic" id="profile-pic">
+                                                    <img class="profile-picture" src="{{ profile.profile_pic.url }}"
+                                                        alt="Profile Picture" id="profile-pic-img">
+                                                </div>
+                                                <br />
 
-                                            <div>{{ profile.bio|default:" "}}</div>
-                                            <div>{% with website=profile.website|default:"" %}</div>
-                                            <div>{{profile.date_created}}</div>
-                                            <div>{{profile.phone}}</div>
-                                            <a href="{{website}}">{{ website }}></a>
-                                            {% endwith%}
-                                            <br />
-                                            <div>
-                                                Interests:
-                                                {% for interest in profile.interests.all %}
-                                                <span>
-                                                    {{ interest.name }}{% if not forloop.last %}, {% endif %}
+                                                <label>Fisrt Name</label>
+                                                <div>{{ profile.first_name|default:" "}}</div>
 
-                                                </span>
-                                                {% endfor %}
+                                                <label>Last Name</label>
+                                                <div>{{ profile.last_name|default:" "}}</div>
+
+                                                <label>Email</label>
+                                                <div>{{ profile.email|default:" "}}</div>
+
+                                                <label>Username</label>
+                                                <div>{{ profile.username|default:" "}}</div>
+
+                                                <label>Bio</label>
+                                                <div>{{ profile.bio|default:" "}}</div>
+
+                                                <label>Webstite</label>
+                                                <div>{% with website=profile.website|default:"" %}</div>
+                                                <a href="{{website}}">{{ website }}></a>
+                                                {% endwith%}
+
+                                                <label>Phone Number</label>
+                                                <div>{{profile.phone}}</div>
+
+                                                <label>Date Joined</label>
+                                                <div>{{profile.date_created}}</div>
+
+                                                <br />
+                                                <div>
+                                                    Interests:
+                                                    {% for interest in profile.interests.all %}
+                                                    <span>
+                                                        {{ interest.name }}{% if not forloop.last %}, {% endif %}
+
+                                                    </span>
+                                                    {% endfor %}
+                                                </div>
+                                                {% endif %}
+                                                {% endwith %}
                                             </div>
-                                            {% endif %}
-                                            {% endwith %}
+
+
+
+
+
+
+
+
 
                                         </ul>
                                     </div>

@@ -52,14 +52,15 @@
         </div>
         <div class="container">
             <div class="profile-settings">
-                <h2>Update Profile</h2>
+
                 {% with profile=user.profile %}
                 {% if profile %}
 
                 <div class="profile-container">
+                    <h2>Update Profile</h2>
                     <div class="profile-pic" id="profile-pic">
                         <!-- Placeholder for profile picture -->
-                        <label for="profile-picture">Profile Picture</label>
+
                         <img src="{{ profile.profile_pic.url }}" alt="Profile Picture" id="profile-pic-img">
                     </div>
 
@@ -67,9 +68,15 @@
 
 
 
+                    <br>
+
                     <form method="POST" action="" enctype="multipart/form-data">
                         {% csrf_token %}
+
+
+
                         {{form.as_p}}
+
 
                         {% endif %}
 
@@ -77,6 +84,7 @@
                         {% endwith%}
                         <input type="submit" value="Update" class="aa-browse-btn" name="submit">
                     </form>
+
                 </div>
             </div>
     </body>

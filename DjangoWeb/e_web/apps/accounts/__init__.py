@@ -1,0 +1,1 @@
+default_app_config = 'e_web.apps.accounts.apps.AccountsConfig'
