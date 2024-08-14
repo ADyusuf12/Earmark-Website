@@ -1,4 +1,5 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
+from django.http import HttpResponseForbidden
 from django.contrib.auth.decorators import login_required
 from .models import Properties_Listing
 from .forms import Properties_ListingForm
@@ -40,12 +41,15 @@ def properties_list_retrieve(request, pk):
 
 @login_required(redirect_field_name="accounts/login")
 def properties_list_create(request):
-    form = Properties_ListingForm()
     if request.method == "POST":
-        form = Properties_ListingForm(request.POST, request.FILES)
+        form = Properties_ListingForm(request.POST, files=request.FILES)
         if form.is_valid():
-            form.save()
+            listing = form.save(commit=False)
+            listing.user = request.user
+            listing.save()
             return redirect("/properties_list")
+    else:
+        form = Properties_ListingForm()
     
     context = {
         "form": form
@@ -54,7 +58,11 @@ def properties_list_create(request):
 
 @login_required(redirect_field_name="accounts/login")
 def properties_list_update(request, pk):
-    listing = Properties_Listing.objects.get(id=pk)
+    listing = get_object_or_404(Properties_Listing, id=pk)
+    
+    if listing.user != request.user:
+        return HttpResponseForbidden("You are not allowed to edit this listing.")
+    
     form = Properties_ListingForm(instance=listing)
     
     if request.method == "POST":
@@ -70,6 +78,10 @@ def properties_list_update(request, pk):
 
 @login_required(redirect_field_name="accounts/login")
 def deleteListing(request, pk):
-    listing = Properties_Listing.objects.get(id=pk)
+    listing = get_object_or_404(Properties_Listing, id=pk)
+    
+    if listing.user != request.user:
+        return HttpResponseForbidden("You are not allowed to delete this listing.")
+    
     listing.delete()
     return redirect("/properties_list")

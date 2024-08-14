@@ -1,6 +1,8 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class Properties_Listing(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
     title = models.CharField(max_length=150)
     price = models.IntegerField()
     parking_space = models.IntegerField(null=True)

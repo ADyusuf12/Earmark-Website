@@ -107,8 +107,14 @@
 
 
                                 </div>
-                                Properties social share
+
+                                <h4>Listing Added by</h4>
+                                <div><a href="{% url 'accounts:profile' %}">{{ listing.user.username }}</a>
+                                </div>
+
+
                                 <div class="aa-properties-social">
+                                    <h4>Properties Social Share</h4>
                                     <ul>
                                         <li>Share</li>
                                         <li><a href="#"><i class="fa fa-facebook"></i></a></li>
