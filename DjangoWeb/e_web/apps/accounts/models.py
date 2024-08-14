@@ -21,10 +21,10 @@ class UserProfile(models.Model):
 
     # details
 
-    first_name = models.CharField(max_length=64, blank=True)
-    last_name = models.CharField(max_length=64, blank=True)
-    email = models.EmailField()
-    username = models.CharField(max_length=64, null=True, blank=True)
+    first_name = models.CharField(max_length=64, blank=False)
+    last_name = models.CharField(max_length=64, blank=False)
+    email = models.EmailField(blank=False)
+    username = models.CharField(max_length=64, null=False, blank=False)
     
     profile_pic = models.ImageField(default="default-pic.jpg", null=True, blank=True)
     
@@ -36,14 +36,14 @@ class UserProfile(models.Model):
     interests = models.ManyToManyField(UserInterest, blank=True)
     date_created = models.DateTimeField(auto_now_add=True, null=True)
     
-    def save(self, *args, **kwargs):
-       User.objects.filter(pk=self.user.pk).update(
-            first_name=self.first_name,
-            last_name=self.last_name,
-            email=self.email,
-            username=self.username
-            )
-       super(UserProfile, self).save(*args, **kwargs) 
+    # def save(self, *args, **kwargs):
+    #    User.objects.filter(pk=self.user.pk).update(
+    #         first_name=self.first_name,
+    #         last_name=self.last_name,
+    #         email=self.email,
+    #         username=self.username
+    #         )
+    #    super(UserProfile, self).save(*args, **kwargs) 
     
     def __str__(self):
         return self.user.username
