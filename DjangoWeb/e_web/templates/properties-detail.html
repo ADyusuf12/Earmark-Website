@@ -83,6 +83,12 @@
                                         aliquid, autem, cum, impedit nostrum, rem molestias quisquam ab iure enim totam?
                                         Itaque esse ut adipisci officiis nulla repellendus ratione dolore, iste ex
                                         doloribus tenetur eos provident quam quasi maxime.</p>
+                                    <h4>Listing Added by</h4>
+                                    <div>
+
+                                        <a
+                                            href="{% url 'accounts:user-profile-detail' listing.user.profile.pk %}">{{ listing.user.username }}</a>
+                                    </div>
                                     <h4>Propetry Features</h4>
                                     <ul>
                                         <li>{{ listing.bedrooms }}Bedrooms</li>
@@ -108,9 +114,7 @@
 
                                 </div>
 
-                                <h4>Listing Added by</h4>
-                                <div><a href="{% url 'accounts:profile' %}">{{ listing.user.username }}</a>
-                                </div>
+
 
 
                                 <div class="aa-properties-social">
