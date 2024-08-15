@@ -97,7 +97,7 @@
                                                 <br />
                                                 <div>
                                                     Interests:
-                                                    {% for interest in profile.interests.all %}
+                                                    {% for interest in user_profile.interests.all %}
                                                     <span>
                                                         {{ interest.name }}{% if not forloop.last %}, {% endif %}
 
