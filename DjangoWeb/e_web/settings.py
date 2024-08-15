@@ -138,9 +138,9 @@ REGISTER_REDIRCET_URL = "accounts:profile"
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'adyusuf68@gmail.com'
-EMAIL_HOST_PASSOWRD = 'dlzw fhjx jnfw uadr'
 EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'adyusuf68@gmail.com'
+EMAIL_HOST_PASSWORD = 'qkgr eeaz kbab eufo'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
