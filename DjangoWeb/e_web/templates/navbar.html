@@ -24,30 +24,38 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-6 col-sm-6 col-xs-6">
-              <div class="aa-header-right">
-                {% if user.is_authenticated %}
-                <span>
-                  <form method="post" action="{% url 'accounts:logout' %}">
-                    {% csrf_token %}
-                    <button type="submit">Log Out</button>
-                    <a class="aa-profile">
-                      <span><a href="{% url 'accounts:profile' %}">@{{ user.username }}</a></span>
+            <div class="container">
+              <div class="col-md-6 col-sm-6 col-xs-6">
+                <div class="aa-header-right">
+                  {% if user.is_authenticated %}
+                  <span>
+                    <form method="post" action="{% url 'accounts:logout' %}">
+                      {% csrf_token %}
+                      <button type="submit">Log Out</button>
+                      <a class="aa-profile">
+                        <span>
+                          <a href="{% url 'accounts:profile' %}" style="text-decoration:underline;">@{{user.username}}
+
+                          </a>
+                        </span>
+                      </a>
+                    </form>{% else %}
+
+                    <a class="aa-register">
+                      <span><a href="{% url 'accounts:register' %}" class="aa-secondary-btn"
+                          style="text-decoration:underline;">Register</a></span>
                     </a>
-                  </form>{% else %}
-
-                  <a class="aa-register">
-                    <span><a href="{% url 'accounts:register' %}">Register</a></span>
-                  </a>
-                  <a class="aa-login">
-                    <span><a href="{% url 'accounts:login' %}">Login</a></span>
-                  </a>
-                  {% endif %}
+                    <a class="aa-login">
+                      <span><a href="{% url 'accounts:login' %}" class="aa-secondary-btn"
+                          style="text-decoration:underline;">Login</a></span>
+                    </a>
+                    {% endif %}
 
 
-                </span>
+                  </span>
 
 
+                </div>
               </div>
             </div>
           </div>
