@@ -168,29 +168,29 @@
               <!-- Start Single properties sidebar -->
               <div class="aa-properties-single-sidebar">
                 <h3>Properties Search</h3>
-                <form action="">
+                <form method="get" action="{% url 'public:properties_list' %}">
                   <div class="aa-single-advance-search">
-                    <input type="text" placeholder="Type Your Location">
+                    <input type="text" placeholder="Type Your Location" value="{{ request.GET.location }}">
                   </div>
                   <div class="aa-single-advance-search">
-                    <select id="" name="">
-                      <option value="0" selected>Category</option>
-                      <option value="1">Flat/Apartment</option>
-                      <option value="2">House</option>
-                      <option value="3">Plot/Land</option>
-                      <option value="4">Commercial</option>
+                    <select name="category">
+                      <option value="" selected>Category</option>
+                      <option value="Flat/Apartment">Flat/Apartment</option>
+                      <option value="House">House</option>
+                      <option value="Plot/Land">Plot/Land</option>
+                      <option value="Commercial">Commercial</option>
                     </select>
                   </div>
                   <div class="aa-single-advance-search">
-                    <select id="" name="">
-                      <option value="0" selected>Rent/Sale</option>
-                      <option value="1">For Rent</option>
-                      <option value="2">For Sale</option>
+                    <select name="status">
+                      <option value="" selected>Rent/Sale</option>
+                      <option value="For Rent">For Rent</option>
+                      <option value="For Sale">For Sale</option>
                     </select>
                   </div>
                   <div class="aa-single-advance-search">
-                    <select id="" name="">
-                      <option value="0" selected>Bedrooms</option>
+                    <select name="bedrooms">
+                      <option value="" selected>Bedrooms</option>
                       <option value="1">1</option>
                       <option value="2">2</option>
                       <option value="3">3</option>
@@ -199,56 +199,56 @@
                     </select>
                   </div>
                   <div class="aa-single-advance-search">
-                    <select>
-                      <option value="0" selected>Min. Price(₦)</option>
-                      <option value="1">1M</option>
-                      <option value="2">5M</option>
-                      <option value="3">10M</option>
-                      <option value="4">15M</option>
-                      <option value="5">20M</option>
-                      <option value="6">25M</option>
-                      <option value="7">50M</option>
-                      <option value="8">70M</option>
+                    <select name="min_price">
+                      <option value="" selected>Min. Price(₦)</option>
+                      <option value="1000000">1M</option>
+                      <option value="5000000">5M</option>
+                      <option value="10000000">10M</option>
+                      <option value="15000000">15M</option>
+                      <option value="20000000">20M</option>
+                      <option value="25000000">25M</option>
+                      <option value="50000000">50M</option>
+                      <option value="70000000">70M</option>
                     </select>
-                    <select>
-                      <option value="0" selected>Max. Price(₦)</option>
-                      <option value="1">50M</option>
-                      <option value="2">60M</option>
-                      <option value="3">700M</option>
-                      <option value="4">100M</option>
-                      <option value="5">150M</option>
-                      <option value="6">200M</option>
-                      <option value="7">250M</option>
-                      <option value="8">500M</option>
+                    <select name="max_price">
+                      <option value="" selected>Max. Price(₦)</option>
+                      <option value="50000000">50M</option>
+                      <option value="60000000">60M</option>
+                      <option value="700000000">700M</option>
+                      <option value="100000000">100M</option>
+                      <option value="150000000">150M</option>
+                      <option value="200000000">200M</option>
+                      <option value="250000000">250M</option>
+                      <option value="500000000">500M</option>
                     </select>
                   </div>
                   <div class="aa-single-advance-search">
                     <select>
-                      <option value="0" selected>Min. Sqm</option>
-                      <option value="1">100</option>
-                      <option value="2">200</option>
-                      <option value="3">300</option>
-                      <option value="4">500</option>
-                      <option value="5">600</option>
-                      <option value="6">700</option>
-                      <option value="7">1000</option>
-                      <option value="8">1200</option>
+                      <option value="" selected>Min. Sqm</option>
+                      <option value="100">100</option>
+                      <option value="200">200</option>
+                      <option value="300">300</option>
+                      <option value="400">500</option>
+                      <option value="500">600</option>
+                      <option value="700">700</option>
+                      <option value="1000">1000</option>
+                      <option value="1200">1200</option>
                     </select>
                     <select>
-                      <option value="0" selected>Max. Sqm</option>
-                      <option value="1">500</option>
-                      <option value="2">600</option>
-                      <option value="3">700</option>
-                      <option value="4">800</option>
-                      <option value="5">900</option>
-                      <option value="6">1000</option>
-                      <option value="7">1200</option>
-                      <option value="8">1500</option>
+                      <option value="" selected>Max. Sqm</option>
+                      <option value="500">500</option>
+                      <option value="600">600</option>
+                      <option value="700">700</option>
+                      <option value="800">800</option>
+                      <option value="900">900</option>
+                      <option value="1000">1000</option>
+                      <option value="1200">1200</option>
+                      <option value="1500">1500</option>
                     </select>
                   </div>
 
                   <div class="aa-single-advance-search">
-                    <input type="submit" value="Search" class="aa-search-btn">
+                    <input class="aa-search-btn" type="submit" value="Search">
                   </div>
                 </form>
               </div>

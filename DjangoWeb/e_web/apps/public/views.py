@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseForbidden
 from django.contrib.auth.decorators import login_required
 from .models import Properties_Listing
-from .forms import Properties_ListingForm
+from .forms import Properties_ListingForm, PropertySearchForm
 
 
 
@@ -26,9 +26,30 @@ def error_page(request):
     return render(request, '404.html')
 
 def properties_list(request):
+    form = PropertySearchForm(request.GET or None)
     listings = Properties_Listing.objects.all()
+
+    if form.is_valid():
+        if form.cleaned_data['location']:
+            listings = listings.filter(location__icontains=form.cleaned_data['location'])
+        if form.cleaned_data['status']:
+            listings = listings.filter(status__icontains=form.cleaned_data['status'])
+        if form.cleaned_data['category']:
+            listings = listings.filter(category__icontains=form.cleaned_data['category'])
+        if form.cleaned_data['bedrooms']:
+            listings = listings.filter(bedrooms=form.cleaned_data['bedrooms'])
+        if form.cleaned_data['min_price']:
+            listings = listings.filter(price__gte=form.cleaned_data['min_price'])
+        if form.cleaned_data['max_price']:
+            listings = listings.filter(price__lte=form.cleaned_data['max_price'])
+        if form.cleaned_data['min_sqm']:
+            listings = listings.filter(sqm__gte=form.cleaned_data['min_sqm'])
+        if form.cleaned_data['max_sqm']:
+            listings = listings.filter(sqm__lte=form.cleaned_data['max_sqm'])
+
     context = {
-        "listings": listings
+        "listings": listings,
+        "form": form,
     }
     return render(request, 'properties.html', context)
 
