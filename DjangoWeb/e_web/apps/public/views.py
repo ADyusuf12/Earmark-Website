@@ -46,6 +46,11 @@ def properties_list(request):
             listings = listings.filter(sqm__gte=form.cleaned_data['min_sqm'])
         if form.cleaned_data['max_sqm']:
             listings = listings.filter(sqm__lte=form.cleaned_data['max_sqm'])
+            
+    
+    if 'status' in request.GET:
+        listings = listings.filter(status__iexact=request.GET['status'])
+        
 
     context = {
         "listings": listings,
