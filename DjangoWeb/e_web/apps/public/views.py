@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.core.paginator import Paginator
 from django.http import HttpResponseForbidden
 from django.contrib.auth.decorators import login_required
 from .models import Properties_Listing
@@ -9,9 +10,10 @@ from .forms import Properties_ListingForm, PropertySearchForm
 
 
 def index(request):
-    listings = Properties_Listing.objects.order_by('id')
+    latest_listings = Properties_Listing.objects.order_by('-created_at')[:3]
     context = {
-        "listings": listings
+        "latest_listings": latest_listings
+        
     }
     return render(request, 'index.html', context)
 
@@ -36,25 +38,29 @@ def properties_list(request):
             listings = listings.filter(status__icontains=form.cleaned_data['status'])
         if form.cleaned_data['category']:
             listings = listings.filter(category__icontains=form.cleaned_data['category'])
-        if form.cleaned_data['bedrooms']:
+        if form.cleaned_data['bedrooms'] is not None:
             listings = listings.filter(bedrooms=form.cleaned_data['bedrooms'])
-        if form.cleaned_data['min_price']:
+        if form.cleaned_data['min_price'] is not None:
             listings = listings.filter(price__gte=form.cleaned_data['min_price'])
-        if form.cleaned_data['max_price']:
+        if form.cleaned_data['max_price'] is not None:
             listings = listings.filter(price__lte=form.cleaned_data['max_price'])
-        if form.cleaned_data['min_sqm']:
+        if form.cleaned_data['min_sqm'] is not None:
             listings = listings.filter(sqm__gte=form.cleaned_data['min_sqm'])
-        if form.cleaned_data['max_sqm']:
+        if form.cleaned_data['max_sqm'] is not None:
             listings = listings.filter(sqm__lte=form.cleaned_data['max_sqm'])
             
     
-    if 'status' in request.GET:
-        listings = listings.filter(status__iexact=request.GET['status'])
+    # if 'status' in request.GET:
+    #     listings = listings.filter(status__iexact=request.GET['status'])
         
 
+    paginator = Paginator(listings, 6)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
     context = {
-        "listings": listings,
+        "listings": page_obj,
         "form": form,
+        "query_params": request.GET.urlencode(),
     }
     return render(request, 'properties.html', context)
 

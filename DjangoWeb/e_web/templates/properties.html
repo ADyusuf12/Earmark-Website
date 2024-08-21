@@ -86,19 +86,16 @@
                 </div>
               </div>
               <!-- Start properties content body -->
-              {% for listing in listings %}
-              {{listing.as_ul}}
-
               <div class="aa-properties-content-body">
-                <span class="aa-properties-nav">
+                <ul class="aa-properties-nav">
+                  {% for listing in listings %}
                   <li>
                     <article class="aa-properties-item">
-
                       <a class="aa-properties-item-img" href="#">
                         <img alt="img" src="{{ listing.image.url }}">
                       </a>
                       <div class="aa-tag for-rent">
-                        {{listing.status}}
+                        {{ listing.status }}
                       </div>
                       <div class="aa-properties-item-content">
                         <div class="aa-properties-info">
@@ -106,54 +103,63 @@
                           <span>{{ listing.bathrooms }} Baths</span>
                           <span>{{ listing.sqm }} sqm</span>
                           <span>{{ listing.parking_space }} Parking Space</span>
-                          <span></span>
                         </div>
                         <div class="aa-properties-about">
-                          <h3><a href="#">
-                              {{ listing.title }}
-                            </a></h3>
+                          <h3><a href="#">{{ listing.title }}</a></h3>
                           <strong>
                             <i class="fa fa-map-marker"></i>
                             {{ listing.location }}
                           </strong>
-                          <p>{{ listing.description}}</p>
+                          <p>{{ listing.description }}</p>
                         </div>
                         <div class="aa-properties-detial">
-
-                          <span class="aa-price">
-                            ₦{{ listing.price }}
-                          </span>
-
+                          <span class="aa-price">₦{{ listing.price }}</span>
                           <a class="aa-secondary-btn" href="/properties_list/{{ listing.id }}">View Details</a>
-
                         </div>
                       </div>
-
                     </article>
-                    {% endfor %}
                   </li>
-                </span>
+                  {% endfor %}
+                </ul>
               </div>
 
               <!-- Start properties content bottom -->
               <div class="aa-properties-content-bottom">
                 <nav>
                   <ul class="pagination">
+                    {% if listings.has_previous %}
                     <li>
-                      <a href="#" aria-label="Previous">
+                      <a href="?page=1&{{ query_params }}" aria-label="First">
+                        <span aria-hidden="true">&laquo;&laquo;</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="?page={{ listings.previous_page_number }}&{{ query_params }}" aria-label="Previous">
                         <span aria-hidden="true">&laquo;</span>
                       </a>
                     </li>
-                    <li><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li class="active"><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li>
-                      <a href="#" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                      </a>
-                    </li>
+                    {% endif %}
+
+                    {% for num in listings.paginator.page_range %}
+                    {% if listings.number == num %}
+                    <li class="active"><a href="#">{{ num }}</a></li>
+                    {% elif num > listings.number|add:'-3' and num < listings.number|add:'3' %} <li><a
+                        href="?page={{ num }}&{{ query_params }}">{{ num }}</a></li>
+                      {% endif %}
+                      {% endfor %}
+
+                      {% if listings.has_next %}
+                      <li>
+                        <a href="?page={{ listings.next_page_number }}&{{ query_params }}" aria-label="Next">
+                          <span aria-hidden="true">&raquo;</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="?page={{ listings.paginator.num_pages }}&{{ query_params }}" aria-label="Last">
+                          <span aria-hidden="true">&raquo;&raquo;</span>
+                        </a>
+                      </li>
+                      {% endif %}
                   </ul>
                 </nav>
               </div>
@@ -170,7 +176,11 @@
                 <h3>Properties Search</h3>
                 <form method="get" action="{% url 'public:properties_list' %}">
                   <div class="aa-single-advance-search">
-                    <input type="text" placeholder="Type Your Location" value="{{ request.GET.location }}">
+                    <select name="location">
+                      <option value="" selected>Select Location</option>
+                      <option value="Kano">Kano</option>
+                      <option value="Abuja">Abuja</option>
+                    </select>
                   </div>
                   <div class="aa-single-advance-search">
                     <select name="category">

@@ -297,19 +297,12 @@
             <span></span>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum sit ea nobis quae vero voluptatibus.</p>
           </div>
-
-
           <div class="aa-latest-properties-content">
-
             <div class="row">
-
-
+              {% for listing in latest_listings %}
               <div class="col-md-4">
-                {% for listing in listings %}
                 <article class="aa-properties-item">
                   <a href="#" class="aa-properties-item-img">
-
-
                     <img src="{{ listing.image.url }}" alt="img">
                   </a>
                   <div class="aa-tag for-sale">
@@ -328,22 +321,16 @@
                         <i class="fa fa-map-marker"></i>
                         {{ listing.location }}
                       </strong>
-                      <p>{{ listing.description}}</p>
+                      <p>{{ listing.description }}</p>
                     </div>
                     <div class="aa-properties-detial">
-                      <span class="aa-price">
-                        ₦{{ listing.price }}
-                      </span>
+                      <span class="aa-price">₦{{ listing.price }}</span>
                       <a href="/properties_list/{{ listing.id }}" class="aa-secondary-btn">View Details</a>
-
                     </div>
-
                   </div>
-                  {% endfor %}
-
                 </article>
-
               </div>
+              {% endfor %}
             </div>
           </div>
         </div>
