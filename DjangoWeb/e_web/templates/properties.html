@@ -265,42 +265,20 @@
               <!-- Start Single properties sidebar -->
               <div class="aa-properties-single-sidebar">
                 <h3>Popular Properties</h3>
+                {% for listing in popular_listings %}
                 <div class="media">
                   <div class="media-left">
                     <a href="#">
-                      <img class="media-object" src="{% static 'theme/img/item/1.jpg' %}" alt="img">
+                      <img class="media-object" src="{{ listing.image.url }}" alt="img">
                     </a>
                   </div>
                   <div class="media-body">
-                    <h4 class="media-heading"><a href="#">This is Title</a></h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                    <span>₦65000</span>
+                    <h4 class="media-heading"><a href="#">{{ listing.title }}</a></h4>
+                    <p>{{ listing.description }}</p>
+                    <span>₦{{ listing.price }}</span>
                   </div>
                 </div>
-                <div class="media">
-                  <div class="media-left">
-                    <a href="#">
-                      <img class="media-object" src="{% static 'theme/img/item/1.jpg' %}" alt="img">
-                    </a>
-                  </div>
-                  <div class="media-body">
-                    <h4 class="media-heading"><a href="#">This is Title</a></h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                    <span>₦65000</span>
-                  </div>
-                </div>
-                <div class="media">
-                  <div class="media-left">
-                    <a href="#">
-                      <img class="media-object" src="{% static 'theme/img/item/1.jpg' %}" alt="img">
-                    </a>
-                  </div>
-                  <div class="media-body">
-                    <h4 class="media-heading"><a href="#">This is Title</a></h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                    <span>₦65000</span>
-                  </div>
-                </div>
+                {% endfor %}
               </div>
             </aside>
           </div>

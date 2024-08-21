@@ -57,15 +57,23 @@ def properties_list(request):
     paginator = Paginator(listings, 6)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
+    
+    # Fetch popular properties
+    popular_listings = Properties_Listing.objects.order_by('-views')[:3]
+    
+    
     context = {
         "listings": page_obj,
         "form": form,
         "query_params": request.GET.urlencode(),
+        "popular_listings": popular_listings
     }
     return render(request, 'properties.html', context)
 
 def properties_list_retrieve(request, pk):
     listing = Properties_Listing.objects.get(id=pk)
+    listing.views += 1
+    listing.save()
     context = {
         "listing": listing
     }

@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 class Properties_Listing(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
     created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+    views = models.PositiveIntegerField(default=0)
     title = models.CharField(max_length=150)
     price = models.IntegerField()
     parking_space = models.IntegerField(null=True, blank=True)
