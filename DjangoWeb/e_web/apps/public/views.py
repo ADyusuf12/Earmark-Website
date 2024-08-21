@@ -74,8 +74,10 @@ def properties_list_retrieve(request, pk):
     listing = Properties_Listing.objects.get(id=pk)
     listing.views += 1
     listing.save()
+    popular_listings = Properties_Listing.objects.order_by('-views')[:3]
     context = {
-        "listing": listing
+        "listing": listing,
+        "popular_listings": popular_listings
     }
     return render(request, 'properties-detail.html', context)
 
