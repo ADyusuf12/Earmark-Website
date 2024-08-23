@@ -18,6 +18,16 @@ def create_user_profile(sender, instance, created, **kwargs):
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
+    
+@receiver(post_save, sender=User)
+def assign_group_permissions(sender, instance, created, **kwargs):
+    if created:
+        # Get the group from the user's groups
+        group = instance.groups.first()
+        if group:
+            # Assign group permissions to the user
+            for perm in group.permissions.all():
+                instance.user_permissions.add(perm)
 
 
 

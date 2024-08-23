@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.core.paginator import Paginator
 from django.http import HttpResponseForbidden
 from django.contrib.auth.decorators import login_required
+from . decorators import user_has_permission
 from .models import Properties_Listing
 from .forms import Properties_ListingForm, PropertySearchForm
 
@@ -82,6 +83,7 @@ def properties_list_retrieve(request, pk):
     return render(request, 'properties-detail.html', context)
 
 @login_required(redirect_field_name="accounts/login")
+@user_has_permission('add_properties_listing')
 def properties_list_create(request):
     if request.method == "POST":
         form = Properties_ListingForm(request.POST, files=request.FILES)
@@ -99,6 +101,7 @@ def properties_list_create(request):
     return render(request, 'create.html', context)
 
 @login_required(redirect_field_name="accounts/login")
+@user_has_permission('change_properties_listing')
 def properties_list_update(request, pk):
     listing = get_object_or_404(Properties_Listing, id=pk)
     
@@ -119,6 +122,7 @@ def properties_list_update(request, pk):
     return render(request, 'update.html', context)
 
 @login_required(redirect_field_name="accounts/login")
+@user_has_permission('delete_properties_listing')
 def deleteListing(request, pk):
     listing = get_object_or_404(Properties_Listing, id=pk)
     

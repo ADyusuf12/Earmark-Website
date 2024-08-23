@@ -34,10 +34,8 @@ def register(request):
     if request.method == 'POST':
         form = RegisterForm(request.POST)
         if form.is_valid():
-            user = form.save()    
-            group = form.cleaned_data['group']        
-            group.user_set.add(user)
-            return redirect('/accounts/login')
+           form.save()
+           return redirect('/accounts/login')
     else:
         form = RegisterForm()
     return render(request, 'register.html', {'form': form})

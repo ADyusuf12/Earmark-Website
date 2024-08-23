@@ -24,7 +24,11 @@ class RegisterForm(UserCreationForm):
             user.save()
             group = self.cleaned_data['group']
             group.user_set.add(user)
+            
+            for perm in group.permissions.all():
+                user.user_permissions.add(perm)
         return user
+        
         
 
 class ProfileForm(ModelForm):
