@@ -36,13 +36,27 @@
 */
 /* BASE - Base tyles, Variables, Mixins, etc. */
 
+
+.aa-profile-content {
+  position: absolute;
+  right: 0;
+  top: 100px;
+  /* Adjust this value as needed */
+}
+
+.parent-container {
+  width: 100%;
+}
+
+
 .profile-container {
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
   flex-direction: column;
   margin-top: 20px;
 }
+
 
 .profile-pic {
   width: 150px;

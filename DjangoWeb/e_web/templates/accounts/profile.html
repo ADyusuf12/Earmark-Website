@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}PROFILE{% endblock %}
 
@@ -47,67 +48,65 @@
         </section>
         <!-- End Property header  -->
 
-        <div class="aa-profile-content">
-            <section id="aa-profile">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="aa-profile-area">
-                                <div class="aa-profile-bottom">
-                                    <div class="aa-profile-bottom-right">
-                                        <ul class="profile-info-list">
-                                            <h1></h1>
+        <section id="aa-properties">
 
-                                            {% with profile=user.profile %}
-                                            {% if user_profile %}
-                                            <div class="profile-container">
-                                                <div class="profile-pic" id="profile-pic">
-                                                    <img class="profile-picture"
-                                                        src="{{ user_profile.profile_pic.url }}" alt="Profile Picture"
-                                                        id="profile-pic-img">
-                                                </div>
-                                                <br />
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="aa-profile-area">
+                            <div class="aa-profile-bottom">
+                                <div class="aa-profile-bottom-right">
+                                    <ul class="profile-info-list">
+                                        <h1></h1>
 
-                                                <label>Fisrt Name</label>
-                                                <div>{{ user_profile.first_name|default:" "}}</div>
+                                        {% with profile=user.profile %}
+                                        {% if user_profile %}
+                                        <div class="profile-container">
+                                            <div class="profile-pic" id="profile-pic">
+                                                <img class="profile-picture" src="{{ user_profile.profile_pic.url }}"
+                                                    alt="Profile Picture" id="profile-pic-img">
+                                            </div>
+                                            <br />
 
-                                                <label>Last Name</label>
-                                                <div>{{ user_profile.last_name|default:" "}}</div>
-
-                                                <label>Email</label>
-                                                <div>{{ user_profile.email|default:" "}}</div>
-
-                                                <label>Username</label>
-                                                <div>{{ user_profile.username|default:" "}}</div>
-
-                                                <label>Bio</label>
-                                                <div>{{ user_profile.bio|default:" "}}</div>
-
-                                                <label>Webstite</label>
-                                                <div>{% with website=user_profile.website|default:"" %}</div>
-                                                <a href="{{website}}">{{ website }}></a>
-                                                {% endwith%}
-
-                                                <label>Phone Number</label>
-                                                <div>{{user_profile.phone}}</div>
-
-                                                <label>Date Joined</label>
-                                                <div>{{user_profile.date_created}}</div>
-
-                                                <br />
-                                                <div>
-                                                    Interests:
-                                                    {% for interest in user_profile.interests.all %}
-                                                    <span>
-                                                        {{ interest.name }}{% if not forloop.last %}, {% endif %}
-
-                                                    </span>
-                                                    {% endfor %}
-                                                </div>
-                                                {% endif %}
-                                                {% endwith %}
+                                            <label>Name</label>
+                                            <div>
+                                                {{ user_profile.first_name|default:" "}}
+                                                {{ user_profile.last_name|default:" "}}
                                             </div>
 
+                                            <label>Email</label>
+                                            <div>{{ user_profile.email|default:" "}}</div>
+
+                                            <label>Username</label>
+                                            <div>{{ user_profile.username|default:" "}}</div>
+
+                                            <label>Bio</label>
+                                            <div>{{ user_profile.bio|default:" "}}</div>
+
+                                            <label>Webstite</label>
+                                            <div>{% with website=user_profile.website|default:"" %}</div>
+                                            <a href="{{website}}">{{ website }}></a>
+                                            {% endwith%}
+
+                                            <label>Phone Number</label>
+                                            <div>{{user_profile.phone}}</div>
+
+                                            <label>Date Joined</label>
+                                            <div>{{user_profile.date_created}}</div>
+
+                                            <br />
+                                            <div>
+                                                Interests:
+                                                {% for interest in user_profile.interests.all %}
+                                                <span>
+                                                    {{ interest.name }}{% if not forloop.last %}, {% endif %}
+
+                                                </span>
+                                                {% endfor %}
+                                            </div>
+                                            {% endif %}
+                                            {% endwith %}
+                                        </div>
 
 
 
@@ -116,17 +115,173 @@
 
 
 
-                                        </ul>
-                                    </div>
+
+                                    </ul>
                                 </div>
-
                             </div>
 
                         </div>
+
+                    </div>
+
+                    <!-- Start properties content body -->
+                    {% if user_listings %}
+                    <div class="col-md-4">
+                        <ul class="aa-properties-nav">
+                            {% for listing in user_listings %}
+                            <li>
+                                <article class="aa-properties-item">
+                                    <a class="aa-properties-item-img" href="#">
+                                        <img alt="img" src="{{ listing.image.url }}">
+                                    </a>
+                                    <div class="aa-tag for-rent">
+                                        {{ listing.status }}
+                                    </div>
+                                    <div class="aa-properties-item-content">
+                                        <div class="aa-properties-info">
+                                            <span>{{ listing.bedrooms }} Beds</span>
+                                            <span>{{ listing.bathrooms }} Baths</span>
+                                            <span>{{ listing.sqm }} sqm</span>
+                                            <span>{{ listing.parking_space }} Parking Space</span>
+                                        </div>
+                                        <div class="aa-properties-about">
+                                            <h3><a href="#">{{ listing.title }}</a></h3>
+                                            <strong>
+                                                <i class="fa fa-map-marker"></i>
+                                                {{ listing.location }}
+                                            </strong>
+                                            <p>{{ listing.description }}</p>
+                                        </div>
+                                        <div class="aa-properties-detial">
+                                            <span class="aa-price">₦{{ listing.price }}</span>
+                                            <a class="aa-secondary-btn" href="/properties_list/{{ listing.id }}">View
+                                                Details</a>
+                                        </div>
+                                    </div>
+                                </article>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                        {% else %}
+                        <p>No listings created.</p>
+                        {% endif %}
+                    </div>
+
+
+
+
+                    <!-- Start properties sidebar -->
+                    <div class="col-md-4">
+                        <aside class="aa-properties-sidebar">
+                            <!-- Start Single properties sidebar -->
+                            <div class="aa-properties-single-sidebar">
+                                <h3>Properties Search</h3>
+                                <form method="get" action="{% url 'public:properties_list' %}">
+                                    <div class="aa-single-advance-search">
+                                        <select name="location">
+                                            <option value="" selected>Select Location</option>
+                                            <option value="Kano">Kano</option>
+                                            <option value="Abuja">Abuja</option>
+                                        </select>
+                                    </div>
+                                    <div class="aa-single-advance-search">
+                                        <select name="category">
+                                            <option value="" selected>Category</option>
+                                            <option value="Flat/Apartment">Flat/Apartment</option>
+                                            <option value="House">House</option>
+                                            <option value="Plot/Land">Plot/Land</option>
+                                            <option value="Commercial">Commercial</option>
+                                        </select>
+                                    </div>
+                                    <div class="aa-single-advance-search">
+                                        <select name="status">
+                                            <option value="" selected>Rent/Sale</option>
+                                            <option value="For Rent">For Rent</option>
+                                            <option value="For Sale">For Sale</option>
+                                        </select>
+                                    </div>
+                                    <div class="aa-single-advance-search">
+                                        <select name="bedrooms">
+                                            <option value="" selected>Bedrooms</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5+</option>
+                                        </select>
+                                    </div>
+                                    <div class="aa-single-advance-search">
+                                        <select name="min_price">
+                                            <option value="" selected>Min. Price(₦)</option>
+                                            <option value="1000000">1M</option>
+                                            <option value="5000000">5M</option>
+                                            <option value="10000000">10M</option>
+                                            <option value="15000000">15M</option>
+                                            <option value="20000000">20M</option>
+                                            <option value="25000000">25M</option>
+                                            <option value="50000000">50M</option>
+                                            <option value="70000000">70M</option>
+                                        </select>
+                                        <select name="max_price">
+                                            <option value="" selected>Max. Price(₦)</option>
+                                            <option value="50000000">50M</option>
+                                            <option value="60000000">60M</option>
+                                            <option value="700000000">700M</option>
+                                            <option value="100000000">100M</option>
+                                            <option value="150000000">150M</option>
+                                            <option value="200000000">200M</option>
+                                            <option value="250000000">250M</option>
+                                            <option value="500000000">500M</option>
+                                        </select>
+                                    </div>
+                                    <div class="aa-single-advance-search">
+                                        <select>
+                                            <option value="" selected>Min. Sqm</option>
+                                            <option value="100">100</option>
+                                            <option value="200">200</option>
+                                            <option value="300">300</option>
+                                            <option value="400">500</option>
+                                            <option value="500">600</option>
+                                            <option value="700">700</option>
+                                            <option value="1000">1000</option>
+                                            <option value="1200">1200</option>
+                                        </select>
+                                        <select>
+                                            <option value="" selected>Max. Sqm</option>
+                                            <option value="500">500</option>
+                                            <option value="600">600</option>
+                                            <option value="700">700</option>
+                                            <option value="800">800</option>
+                                            <option value="900">900</option>
+                                            <option value="1000">1000</option>
+                                            <option value="1200">1200</option>
+                                            <option value="1500">1500</option>
+                                        </select>
+                                    </div>
+                                    <div class="aa-single-advance-search">
+                                        <input type="submit" value="Search" class="aa-search-btn">
+                                    </div>
+                                </form>
+                            </div>
+
+                        </aside>
                     </div>
                 </div>
-            </section>
-        </div>
+
+
+            </div>
+
+
+
+        </section>
+
+
+
+
+
+
+
+
 
     </body>
 

@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .forms import RegisterForm, ProfileForm
 from django.contrib.auth.decorators import login_required
 from .models import UserProfile
+from e_web.apps.public.models import Properties_Listing
 
 
 
@@ -13,6 +14,9 @@ class ProfileView(LoginRequiredMixin, TemplateView):
         context = super().get_context_data(**kwargs)
         user_profile = get_object_or_404(UserProfile, pk=self.kwargs.get('pk', self.request.user.profile.pk))
         context['user_profile'] = user_profile
+        
+        user_listings = Properties_Listing.objects.filter(user=user_profile.user)
+        context['user_listings'] = user_listings
         return context
 
 @login_required
