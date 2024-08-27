@@ -47,46 +47,53 @@
         <!-- End Property header  -->
 
 
-        <div class="header">
-            <h1>Profile Settings</h1>
-        </div>
-        <div class="container">
-            <div class="profile-settings">
 
-                {% with profile=user.profile %}
-                {% if profile %}
+        <section id="aa-signin">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
 
-                <div class="profile-container">
-                    <h2>Update Profile</h2>
-                    <div class="profile-pic" id="profile-pic">
-                        <!-- Placeholder for profile picture -->
+                        <div class="aa-signin-area">
+                            <div class="aa-signin-form">
+                                <div class="aa-signin-form-title">
+                                    <h1>Profile Settings</h1>
+                                    {% with profile=user.profile %}
+                                    {% if profile %}
 
-                        <img src="{{ profile.profile_pic.url }}" alt="Profile Picture" id="profile-pic-img">
+
+
+
+                                    {% if form.is_multipart %}
+                                    <div class="profile-pic" id="profile-pic">
+                                        <img src="{{ profile.profile_pic.url }}" alt="Profile Picture"
+                                            id="profile-pic-img">
+                                    </div>
+                                </div>
+
+                                <br>
+
+                                <form method="POST" action="" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <div class="aa-single-field">{{form.as_p}}</div>
+
+
+                                    {% endif %}
+
+                                    {% endif %}
+                                    {% endwith%}
+                                    <div class="aa-single-submit">
+                                        <input type="submit" value="Update Profile" class="aa-browse-btn" name="submit">
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
                     </div>
-
-                    {% if form.is_multipart %}
-
-
-
-                    <br>
-
-                    <form method="POST" action="" enctype="multipart/form-data">
-                        {% csrf_token %}
-
-
-
-                        {{form.as_p}}
-
-
-                        {% endif %}
-
-                        {% endif %}
-                        {% endwith%}
-                        <input type="submit" value="Update" class="aa-browse-btn" name="submit">
-                    </form>
-
                 </div>
             </div>
+        </section>
+
+
     </body>
 
 </html>

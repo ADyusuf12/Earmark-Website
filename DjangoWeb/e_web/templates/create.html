@@ -42,20 +42,24 @@
     </section>
     <!-- End Property header  -->
 
-    <section id="aa-listing">
+    <section id="aa-signin">
       <div class="container">
         <div class="row">
           <div class="col-md-12">
-            <div class="aa-listing-area">
-              <div class="aa-listing-form">
-                <div class="aa-listing-form-title">
+            <div class="aa-signin-area">
+              <div class="aa-signin-form">
+                <div class="aa-signin-form-title">
                   <h2>Create A Listing</h2>
-                  <span></span>
+
                 </div>
                 <form method="post" enctype="multipart/form-data">
                   {% csrf_token %}
-                  {{ form.as_p }}
-                  <button type="submit">Create</button>
+                  <div class="aa-single-field">
+                    {{ form.as_p }}
+                  </div>
+                  <div class="aa-single-submit">
+                    <input type="submit" value="Create Listing" class="aa-browse-btn" name="submit">
+                  </div>
                 </form>
               </div>
             </div>

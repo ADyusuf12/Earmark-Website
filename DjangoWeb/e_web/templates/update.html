@@ -5,65 +5,73 @@
 {% block content %}
 <!DOCTYPE html>
 <html lang="en">
+
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    
+
 
   </head>
-  <body>  
+
+  <body>
     <!-- SCROLL TOP BUTTON -->
     <a class="scrollToTop" href="#"><i class="fa fa-angle-double-up"></i></a>
-  <!-- END SCROLL TOP BUTTON -->
+    <!-- END SCROLL TOP BUTTON -->
 
 
-  <!-- Start Property header  -->
-  <section id="aa-property-header">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="aa-property-header-inner">
-            <h2>Create</h2>
-            <ol class="breadcrumb">
-              <li>
-                {% url 'public:index' as index_url %}{% if request.path == index_url %}{% else %}<a href="{{ index_url }}">HOME</a>{% endif %}</span></a>
-            </li>            
-            <li class="active">Create</li>
-          </ol>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section> 
-  <!-- End Property header  -->
- 
-  <section id="aa-listing">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="aa-listing-area">
-            <div class="aa-listing-form">
-              <div class="aa-listing-form-title">
-            
-                <h4>Create A Listing</h4>
-              </div>
-              <form method="post" enctype="multipart/form-data">  
-                {% csrf_token %}                                               
-                {{ form.as_p }}
-                <button type="submit">Create</button>
-              </form>
+    <!-- Start Property header  -->
+    <section id="aa-property-header">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="aa-property-header-inner">
+              <h2>Create</h2>
+              <ol class="breadcrumb">
+                <li>
+                  {% url 'public:index' as index_url %}{% if request.path == index_url %}{% else %}<a
+                    href="{{ index_url }}">HOME</a>{% endif %}</span></a>
+                </li>
+                <li class="active">Create</li>
+              </ol>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </section> 
+    </section>
+    <!-- End Property header  -->
+
+    <section id="aa-signin">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="aa-signin-area">
+              <div class="aa-signin-form">
+                <div class="aa-signin-form-title">
+
+                  <h4>Update Listing</h4>
+                </div>
+                <form method="post" enctype="multipart/form-data">
+                  {% csrf_token %}
+                  <div class="aa-single-field">
+                    {{ form.as_p }}
+                  </div>
+                  <div class="aa-single-submit">
+                    <input type="submit" value="Update Listing" class="aa-browse-btn" name="submit">
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
 
-  
-  
+
+
   </body>
-</html> 
- {% endblock %}
+
+</html>
+{% endblock %}

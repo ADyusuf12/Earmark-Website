@@ -99,10 +99,19 @@
                       </div>
                       <div class="aa-properties-item-content">
                         <div class="aa-properties-info">
+                          {% if listing.bedrooms %}
                           <span>{{ listing.bedrooms }} Beds</span>
+                          {% endif %}
+
+                          {% if listing.bathrooms %}
                           <span>{{ listing.bathrooms }} Baths</span>
+                          {% endif %}
+
                           <span>{{ listing.sqm }} sqm</span>
+
+                          {% if listing.parking_space %}
                           <span>{{ listing.parking_space }} Parking Space</span>
+                          {% endif %}
                         </div>
                         <div class="aa-properties-about">
                           <h3><a href="#">{{ listing.title }}</a></h3>

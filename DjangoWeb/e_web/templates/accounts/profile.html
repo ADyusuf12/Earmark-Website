@@ -123,49 +123,9 @@
                         </div>
 
                     </div>
+                    <div class="col-md-4"> </div>
 
-                    <!-- Start properties content body -->
-                    {% if user_listings %}
-                    <div class="col-md-4">
-                        <ul class="aa-properties-nav">
-                            {% for listing in user_listings %}
-                            <li>
-                                <article class="aa-properties-item">
-                                    <a class="aa-properties-item-img" href="#">
-                                        <img alt="img" src="{{ listing.image.url }}">
-                                    </a>
-                                    <div class="aa-tag for-rent">
-                                        {{ listing.status }}
-                                    </div>
-                                    <div class="aa-properties-item-content">
-                                        <div class="aa-properties-info">
-                                            <span>{{ listing.bedrooms }} Beds</span>
-                                            <span>{{ listing.bathrooms }} Baths</span>
-                                            <span>{{ listing.sqm }} sqm</span>
-                                            <span>{{ listing.parking_space }} Parking Space</span>
-                                        </div>
-                                        <div class="aa-properties-about">
-                                            <h3><a href="#">{{ listing.title }}</a></h3>
-                                            <strong>
-                                                <i class="fa fa-map-marker"></i>
-                                                {{ listing.location }}
-                                            </strong>
-                                            <p>{{ listing.description }}</p>
-                                        </div>
-                                        <div class="aa-properties-detial">
-                                            <span class="aa-price">₦{{ listing.price }}</span>
-                                            <a class="aa-secondary-btn" href="/properties_list/{{ listing.id }}">View
-                                                Details</a>
-                                        </div>
-                                    </div>
-                                </article>
-                            </li>
-                            {% endfor %}
-                        </ul>
-                        {% else %}
-                        <p>No listings created.</p>
-                        {% endif %}
-                    </div>
+
 
 
 
@@ -265,6 +225,55 @@
                             </div>
 
                         </aside>
+                    </div>
+                    <!-- Start properties content body -->
+                    {% if user_listings %}
+                    <div class="col-md-10">
+                        <ul class="aa-properties-nav">
+                            {% for listing in user_listings %}
+                            <li>
+                                <article class="aa-properties-item">
+                                    <a class="aa-properties-item-img" href="#">
+                                        <img alt="img" src="{{ listing.image.url }}">
+                                    </a>
+                                    <div class="aa-tag for-rent">
+                                        {{ listing.status }}
+                                    </div>
+                                    <div class="aa-properties-item-content">
+                                        <div class="aa-properties-info">
+
+                                            {% if listing.bedrooms %}
+                                            <span>{{ listing.bedrooms }} Beds</span>
+                                            {% endif %}
+                                            {% if listing.bathrooms %}
+                                            <span>{{ listing.bathrooms }} Baths</span>
+                                            {% endif %}
+                                            <span>{{ listing.sqm }} sqm</span>
+                                            {% if listing.parking_space %}
+                                            <span>{{ listing.parking_space }} Parking Space</span>
+                                            {% endif %}
+                                        </div>
+                                        <div class="aa-properties-about">
+                                            <h3><a href="#">{{ listing.title }}</a></h3>
+                                            <strong>
+                                                <i class="fa fa-map-marker"></i>
+                                                {{ listing.location }}
+                                            </strong>
+                                            <p>{{ listing.description }}</p>
+                                        </div>
+                                        <div class="aa-properties-detial">
+                                            <span class="aa-price">₦{{ listing.price }}</span>
+                                            <a class="aa-secondary-btn" href="/properties_list/{{ listing.id }}">View
+                                                Details</a>
+                                        </div>
+                                    </div>
+                                </article>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                        {% else %}
+                        <p>No listings created.</p>
+                        {% endif %}
                     </div>
                 </div>
 
