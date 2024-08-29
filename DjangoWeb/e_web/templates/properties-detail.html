@@ -70,6 +70,7 @@
                                     <img src="{% static 'theme/img/slider/3.jpg' %}" alt="img">
                                 </div>
                                 <div class="aa-properties-info">
+                                    <button id="save-listing-btn" class="aa-primary-btn">Save Listing</button>
                                     <h2>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex, alias!</h2>
                                     <span class="aa-price">₦{{ listing.price }}</span>
                                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae voluptatibus
@@ -113,9 +114,6 @@
 
 
                                 </div>
-
-
-
 
                                 <div class="aa-properties-social">
                                     <h4>Properties Social Share</h4>
@@ -359,6 +357,32 @@
                 </div>
             </div>
         </footer>
+
+        <script>document.getElementById('save-listing-btn').addEventListener('click', function () {
+                // Send an AJAX request to your backend view (save_listing_view)
+                // Example using fetch API:
+                fetch('/save-listing/{{ listing.id }}/', {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRFToken': '{{ csrf_token }}',  // Include CSRF token
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ listing_id: {{ listing.id }} }),  // Send the listing ID
+            })
+            .then(response => {
+                        if (response.ok) {
+                            // Property saved successfully
+                            alert('Property saved successfully!');
+                            // Optionally, update the UI (e.g., change button text or style)
+                        } else {
+                            // Handle error (e.g., user not authenticated)
+                            alert('Error saving property. Please log in.');
+                        }
+                    })
+                .catch(error => {
+                    console.error('Error saving property:', error);
+                });
+          });</script>
 
 
     </body>

@@ -1,0 +1,302 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}SAVED PROPERTIES{% endblock %}
+
+{% block content %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    </head>
+
+    <body class="aa-price-range">
+        <!-- Pre Loader -->
+        <div id="aa-preloader-area">
+            <div class="pulse"></div>
+        </div>
+        <!-- SCROLL TOP BUTTON -->
+        <a class="scrollToTop" href="#"><i class="fa fa-angle-double-up"></i></a>
+        <!-- END SCROLL TOP BUTTON -->
+
+
+        <!-- Start Property header  -->
+        <section id="aa-property-header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="aa-property-header-inner">
+                            <h2>Saved Properties</h2>
+                            <ol class="breadcrumb">
+                                <li>
+                                    {% url 'public:index' as index_url %}{% if request.path == index_url %}{% else %}<a
+                                        href="{{ index_url }}">HOME</a>{% endif %}</span></a>
+                                </li>
+
+
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End Property header  -->
+
+        <!-- Start Properties  -->
+
+
+        <section id="aa-properties">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-11">
+                        <div class="aa-properties-content">
+                            <!-- start properties content head -->
+                            <div class="aa-properties-content-head">
+                                <div class="aa-properties-content-head-left">
+                                    <form action="" class="aa-sort-form">
+                                        <label for="">Sort by</label>
+                                        <select name="">
+                                            <option value="1" selected="Default">Default</option>
+                                            <option value="2">Name</option>
+                                            <option value="3">Price</option>
+                                            <option value="4">Date</option>
+                                        </select>
+                                    </form>
+                                    <form action="" class="aa-show-form">
+                                        <label for="">Show</label>
+                                        <select name="">
+                                            <option value="1" selected="12">6</option>
+                                            <option value="2">12</option>
+                                            <option value="3">24</option>
+                                        </select>
+                                    </form>
+                                </div>
+                                <div class="aa-properties-content-head-right">
+                                    <a id="aa-grid-properties" href="#"><span class="fa fa-th"></span></a>
+                                    <a id="aa-list-properties" href="#"><span class="fa fa-list"></span></a>
+                                </div>
+                            </div>
+                            <!-- Start properties content body -->
+                            <div class="aa-properties-content-body">
+                                <ul class="aa-properties-nav">
+
+                                    {% for listing in saved_listings %}
+
+                                    <li>
+                                        <article class="aa-properties-item">
+                                            <a class="aa-properties-item-img" href="#">
+                                                <img alt="img" src="{{ listing.image.url }}">
+                                            </a>
+                                            <div class="aa-tag for-rent">
+                                                {{ listing.status }}
+                                            </div>
+                                            <div class="aa-properties-item-content">
+                                                <div class="aa-properties-info">
+                                                    {% if listing.bedrooms %}
+                                                    <span>{{ listing.bedrooms }} Beds</span>
+                                                    {% endif %}
+
+                                                    {% if listing.bathrooms %}
+                                                    <span>{{ listing.bathrooms }} Baths</span>
+                                                    {% endif %}
+
+                                                    <span>{{ listing.sqm }} sqm</span>
+
+                                                    {% if listing.parking_space %}
+                                                    <span>{{ listing.parking_space }} Parking Space</span>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="aa-properties-about">
+                                                    <h3><a href="#">{{ listing.title }}</a></h3>
+                                                    <strong>
+                                                        <i class="fa fa-map-marker"></i>
+                                                        {{ listing.location }}
+                                                    </strong>
+                                                    <p>{{ listing.description }}</p>
+                                                </div>
+                                                <div class="aa-properties-detial">
+                                                    <span class="aa-price">₦{{ listing.price }}</span>
+                                                    <a class="aa-secondary-btn"
+                                                        href="/properties_list/{{ listing.id }}">View Details</a>
+                                                </div>
+                                            </div>
+                                        </article>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                            <!-- Start properties sidebar -->
+
+                            <div class="col-md-4">
+                                <aside class="aa-properties-sidebar">
+                                    <!-- Start Single properties sidebar -->
+                                    <div class="aa-properties-single-sidebar">
+                                        <h3>Properties Search</h3>
+                                        <form method="get" action="{% url 'public:properties_list' %}">
+                                            <div class="aa-single-advance-search">
+                                                <select name="location">
+                                                    <option value="" selected>Select Location</option>
+                                                    <option value="Kano">Kano</option>
+                                                    <option value="Abuja">Abuja</option>
+                                                </select>
+                                            </div>
+                                            <div class="aa-single-advance-search">
+                                                <select name="category">
+                                                    <option value="" selected>Category</option>
+                                                    <option value="Flat/Apartment">Flat/Apartment</option>
+                                                    <option value="House">House</option>
+                                                    <option value="Plot/Land">Plot/Land</option>
+                                                    <option value="Commercial">Commercial</option>
+                                                </select>
+                                            </div>
+                                            <div class="aa-single-advance-search">
+                                                <select name="status">
+                                                    <option value="" selected>Rent/Sale</option>
+                                                    <option value="For Rent">For Rent</option>
+                                                    <option value="For Sale">For Sale</option>
+                                                </select>
+                                            </div>
+                                            <div class="aa-single-advance-search">
+                                                <select name="bedrooms">
+                                                    <option value="" selected>Bedrooms</option>
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                    <option value="5">5+</option>
+                                                </select>
+                                            </div>
+                                            <div class="aa-single-advance-search">
+                                                <select name="min_price">
+                                                    <option value="" selected>Min. Price(₦)</option>
+                                                    <option value="1000000">1M</option>
+                                                    <option value="5000000">5M</option>
+                                                    <option value="10000000">10M</option>
+                                                    <option value="15000000">15M</option>
+                                                    <option value="20000000">20M</option>
+                                                    <option value="25000000">25M</option>
+                                                    <option value="50000000">50M</option>
+                                                    <option value="70000000">70M</option>
+                                                </select>
+                                                <select name="max_price">
+                                                    <option value="" selected>Max. Price(₦)</option>
+                                                    <option value="50000000">50M</option>
+                                                    <option value="60000000">60M</option>
+                                                    <option value="700000000">700M</option>
+                                                    <option value="100000000">100M</option>
+                                                    <option value="150000000">150M</option>
+                                                    <option value="200000000">200M</option>
+                                                    <option value="250000000">250M</option>
+                                                    <option value="500000000">500M</option>
+                                                </select>
+                                            </div>
+                                            <div class="aa-single-advance-search">
+                                                <select>
+                                                    <option value="" selected>Min. Sqm</option>
+                                                    <option value="100">100</option>
+                                                    <option value="200">200</option>
+                                                    <option value="300">300</option>
+                                                    <option value="400">500</option>
+                                                    <option value="500">600</option>
+                                                    <option value="700">700</option>
+                                                    <option value="1000">1000</option>
+                                                    <option value="1200">1200</option>
+                                                </select>
+                                                <select>
+                                                    <option value="" selected>Max. Sqm</option>
+                                                    <option value="500">500</option>
+                                                    <option value="600">600</option>
+                                                    <option value="700">700</option>
+                                                    <option value="800">800</option>
+                                                    <option value="900">900</option>
+                                                    <option value="1000">1000</option>
+                                                    <option value="1200">1200</option>
+                                                    <option value="1500">1500</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="aa-single-advance-search">
+                                                <input class="aa-search-btn" type="submit" value="Search">
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <!-- Start Single properties sidebar -->
+                                    <div class="aa-properties-single-sidebar">
+                                        <h3>Popular Properties</h3>
+                                        {% for listing in popular_listings %}
+                                        <div class="media">
+                                            <div class="media-left">
+                                                <a href="#">
+                                                    <img class="media-object" src="{{ listing.image.url }}" alt="img">
+                                                </a>
+                                            </div>
+                                            <div class="media-body">
+                                                <h4 class="media-heading"><a href="#">{{ listing.title }}</a></h4>
+                                                <p>{{ listing.description }}</p>
+                                                <span>₦{{ listing.price }}</span>
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                </aside>
+                            </div>
+
+
+                        </div>
+                    </div>
+        </section>
+
+        <!-- / Properties  -->
+        <!-- Footer -->
+        <footer id="aa-footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="aa-footer-area">
+                            <div class="row">
+                                <!-- <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="aa-footer-left">
+             <p>Designed by <a rel="nofollow" href="http://www.markups.io/">MarkUps.io</a></p>
+            </div>
+          </div> -->
+                                <div class="col-md-3 col-sm-6 col-xs-12">
+                                    <div class="aa-footer-middle">
+                                        <a href="https://www.facebook.com/earmarkinvest"><i
+                                                class="fa fa-facebook"></i></a>
+                                        <a href="https://x.com/earmarkinvest"><i class="fa fa-twitter"></i></a>
+                                        <a href="https://www.instagram.com/earmarkinvest"><i
+                                                class="fa fa-instagram"></i></a>
+                                        <!-- <a href="#"><i class="fa fa-google-plus"></i></a>
+              <a href="#"><i class="fa fa-youtube"></i></a> -->
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12 col-xs-12">
+                                    <div class="aa-footer-right">
+                                        <a href="#">Home</a>
+                                        <a href="#">Support</a>
+                                        <a href="#">License</a>
+                                        <a href="#">FAQ</a>
+                                        <a href="#">Privacy & Term</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+
+    </body>
+
+</html>
+
+
+{% endblock %}

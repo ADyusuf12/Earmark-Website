@@ -1,5 +1,3 @@
-{% url 'contact:contact' as contact_url %}
-
 <!-- SCROLL TOP BUTTON -->
 <a class="scrollToTop" href="#"><i class="fa fa-angle-double-up"></i></a>
 <!-- END SCROLL TOP BUTTON -->
@@ -125,12 +123,26 @@
           </span>
           <span>
             <li>
-
+              {% url 'contact:contact' as contact_url %}
               <span>{% if request.path == contact_url %}CONTACT{% else %}<a href="{{ contact_url }}">CONTACT</a>
                 {% endif %}
               </span>
             </li>
           </span>
+
+          <span>
+            <li>
+              {% url 'public:saved_listings' as saved_listings_url %}
+              <span>
+                {% if request.path == saved_listings_url %}SAVED PROPERTIES{% else %}
+                <a href="{{ saved_listings_url }}">SAVED PROPERTIES
+
+                </a>{%endif %}
+              </span>
+            </li>
+          </span>
+
+
 
         </ul>
       </div>

@@ -37,6 +37,25 @@
 /* BASE - Base tyles, Variables, Mixins, etc. */
 
 
+
+
+
+.save-button {
+  background-color: #007bff;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.save-button:hover {
+  background-color: #0056b3;
+}
+
+
+
 .aa-profile-content {
   position: absolute;
   right: 0;

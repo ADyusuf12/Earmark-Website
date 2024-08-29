@@ -1,10 +1,13 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator
-from django.http import HttpResponseForbidden
+from django.http import HttpResponseForbidden, JsonResponse
 from django.contrib.auth.decorators import login_required
 from . decorators import user_has_permission
 from .models import Properties_Listing
 from .forms import Properties_ListingForm, PropertySearchForm
+from django.views.generic import ListView
+
 
 
 
@@ -76,11 +79,46 @@ def properties_list_retrieve(request, pk):
     listing.views += 1
     listing.save()
     popular_listings = Properties_Listing.objects.order_by('-views')[:3]
+
+    # Retrieve the users who have saved this property
+    saved_users = listing.saved_by_users.all()
+
     context = {
         "listing": listing,
-        "popular_listings": popular_listings
+        "popular_listings": popular_listings,
+        "saved_users": saved_users,
     }
     return render(request, 'properties-detail.html', context)
+
+
+
+
+
+class SavedListingsView(ListView):
+    model = Properties_Listing
+    template_name = 'saved_listings.html'
+    context_object_name = 'saved_listings'
+
+    def get_queryset(self):
+        # Filter saved properties for the current user
+        return Properties_Listing.objects.filter(saved_by_users=self.request.user)
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Retrieve popular properties (e.g., top 3 by views)
+        popular_listings = Properties_Listing.objects.order_by('-views')[:3]
+        context['popular_listings'] = popular_listings
+        return context
+
+
+def save_listing_view(request, pk):
+    if request.method == 'POST' and request.user.is_authenticated:
+        listing = get_object_or_404(Properties_Listing, id=pk)
+        listing.saved_by_users.add(request.user)
+        return JsonResponse({'message': 'Property saved successfully'})
+    else:
+        return JsonResponse({'error': 'Unauthorized'}, status=401)
+
 
 @login_required(redirect_field_name="accounts/login")
 @user_has_permission('add_properties_listing')
