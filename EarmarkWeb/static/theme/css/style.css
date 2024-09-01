@@ -928,6 +928,22 @@ img {
   top: -15px;
 }
 
+.aa-properties-item .aa-save-tag {
+  color: #fff;
+  padding: 6px 10px;
+  position: absolute;
+  right: 15px;
+  top: -15px;
+}
+
+.aa-properties-item .save {
+  background-color: #ded9e2;
+}
+
+.aa-properties-item .unsave {
+  background-color: #6320ce;
+}
+
 .aa-properties-item .for-rent {
   background-color: #20ceb3;
 }

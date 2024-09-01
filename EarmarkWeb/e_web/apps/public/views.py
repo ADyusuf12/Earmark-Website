@@ -69,7 +69,7 @@ def properties_list(request):
     context = {
         "listings": page_obj,
         "form": form,
-        "query_params": request.GET.urlencode(),
+        "page_obj": page_obj,
         "popular_listings": popular_listings
     }
     return render(request, 'properties.html', context)

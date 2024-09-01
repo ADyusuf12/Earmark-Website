@@ -138,38 +138,35 @@
                   <ul class="pagination">
                     {% if listings.has_previous %}
                     <li>
-                      <a href="?page=1&{{ query_params }}" aria-label="First">
-                        <span aria-hidden="true">&laquo;&laquo;</span>
+                      <a href="?page=1" aria-label="First">
+                        <span aria-hidden="true">First</span>
                       </a>
                     </li>
                     <li>
-                      <a href="?page={{ listings.previous_page_number }}&{{ query_params }}" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
+                      <a href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                        <span aria-hidden="true">Previous</span>
                       </a>
                     </li>
                     {% endif %}
 
-                    {% for num in listings.paginator.page_range %}
-                    {% if listings.number == num %}
-                    <li class="active"><a href="#">{{ num }}</a></li>
-                    {% elif num > listings.number|add:'-3' and num < listings.number|add:'3' %} <li><a
-                        href="?page={{ num }}&{{ query_params }}">{{ num }}</a></li>
-                      {% endif %}
-                      {% endfor %}
+                    <span>
+                      Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                    </span>
 
-                      {% if listings.has_next %}
-                      <li>
-                        <a href="?page={{ listings.next_page_number }}&{{ query_params }}" aria-label="Next">
-                          <span aria-hidden="true">&raquo;</span>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="?page={{ listings.paginator.num_pages }}&{{ query_params }}" aria-label="Last">
-                          <span aria-hidden="true">&raquo;&raquo;</span>
-                        </a>
-                      </li>
-                      {% endif %}
+                    {% if listings.has_next %}
+                    <li>
+                      <a href="?page={{ listings.next_page_number }}" aria-label="Next">
+                        <span aria-hidden="true">Next</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="?page={{ listings.paginator.num_pages }}" aria-label="Last">
+                        <span aria-hidden="true">Last</span>
+                      </a>
+                    </li>
+                    {% endif %}
                   </ul>
+
                 </nav>
               </div>
             </div>

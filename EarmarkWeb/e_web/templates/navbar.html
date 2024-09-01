@@ -104,6 +104,17 @@
               </span>
             </li>
           </span>
+          <span>
+            <li>
+              {% url 'public:saved_listings' as saved_listings_url %}
+              <span>
+                {% if request.path == saved_listings_url %}SAVED PROPERTIES{% else %}
+                <a href="{{ saved_listings_url }}">SAVED PROPERTIES
+
+                </a>{%endif %}
+              </span>
+            </li>
+          </span>
 
           <span>
             <li>
@@ -130,17 +141,7 @@
             </li>
           </span>
 
-          <span>
-            <li>
-              {% url 'public:saved_listings' as saved_listings_url %}
-              <span>
-                {% if request.path == saved_listings_url %}SAVED PROPERTIES{% else %}
-                <a href="{{ saved_listings_url }}">SAVED PROPERTIES
 
-                </a>{%endif %}
-              </span>
-            </li>
-          </span>
 
 
 
