@@ -56,6 +56,8 @@ def properties_list(request):
     
     # if 'status' in request.GET:
     #     listings = listings.filter(status__iexact=request.GET['status'])
+    
+    listings = listings.order_by('-created_at')
         
 
     paginator = Paginator(listings, 6)
@@ -91,9 +93,6 @@ def properties_list_retrieve(request, pk):
     return render(request, 'properties-detail.html', context)
 
 
-
-
-
 class SavedListingsView(ListView):
     model = Properties_Listing
     template_name = 'saved_listings.html'
@@ -116,6 +115,14 @@ def save_listing_view(request, pk):
         listing = get_object_or_404(Properties_Listing, id=pk)
         listing.saved_by_users.add(request.user)
         return JsonResponse({'message': 'Property saved successfully'})
+    else:
+        return JsonResponse({'error': 'Unauthorized'}, status=401)
+    
+def unsave_listing_view(request, pk):
+    if request.method == 'POST' and request.user.is_authenticated:
+        listing = get_object_or_404(Properties_Listing, id=pk)
+        listing.saved_by_users.remove(request.user)
+        return JsonResponse({'message': 'Property removed from saved listings'})
     else:
         return JsonResponse({'error': 'Unauthorized'}, status=401)
 

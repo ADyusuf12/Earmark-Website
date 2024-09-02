@@ -97,6 +97,9 @@
                       <div class="aa-tag for-rent">
                         {{ listing.status }}
                       </div>
+                      <div class="aa-save-tag save"><button class="save-listing-btn"
+                          data-listing-id="{{ listing.id }}">Save</button>
+                      </div>
                       <div class="aa-properties-item-content">
                         <div class="aa-properties-info">
                           {% if listing.bedrooms %}
@@ -332,6 +335,38 @@
         </div>
       </div>
     </footer>
+    <script>
+      // JavaScript to handle the button click
+      document.querySelectorAll('.save-listing-btn').forEach(button => {
+        button.addEventListener('click', function () {
+          const listingId = this.getAttribute('data-listing-id');
+
+          // Send an AJAX request to your backend view (save_listing_view)
+          // Example using fetch API:
+          fetch(`/save-listing/${listingId}/`, {
+            method: 'POST',
+            headers: {
+              'X-CSRFToken': '{{ csrf_token }}',  // Include CSRF token
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ listing_id: listingId }),  // Send the listing ID
+          })
+            .then(response => {
+              if (response.ok) {
+                // Property saved successfully
+                alert('Property saved successfully!');
+                // Optionally, update the UI (e.g., change button text or style)
+              } else {
+                // Handle error (e.g., user not authenticated)
+                alert('Error saving property. Please log in.');
+              }
+            })
+            .catch(error => {
+              console.error('Error saving property:', error);
+            });
+        });
+      });
+    </script>
 
 
   </body>

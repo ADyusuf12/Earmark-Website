@@ -97,6 +97,9 @@
                                             <div class="aa-tag for-rent">
                                                 {{ listing.status }}
                                             </div>
+                                            <div class="aa-save-tag unsave"><button class="unsave-button"
+                                                    data-listing-id="{{ listing.id }}">Unsave</button>
+                                            </div>
                                             <div class="aa-properties-item-content">
                                                 <div class="aa-properties-info">
                                                     {% if listing.bedrooms %}
@@ -292,6 +295,38 @@
                 </div>
             </div>
         </footer>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const unsaveButtons = document.querySelectorAll('.unsave-button');
+                unsaveButtons.forEach(button => {
+                    button.addEventListener('click', function () {
+                        const listingId = button.getAttribute('data-listing-id');
+                        // Send an AJAX request to unsave the property
+                        fetch(`/unsave-listing/${listingId}/`, {
+                            method: 'POST',
+                            headers: {
+                                'X-CSRFToken': '{{ csrf_token }}',  // Include CSRF token
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({ listing_id: listingId }),
+                        })
+                            .then(response => {
+                                if (response.ok) {
+                                    // Property successfully removed from saved listings
+                                    button.closest('li').remove();  // Remove the property from the list
+                                } else {
+                                    // Handle error (e.g., user not authenticated)
+                                    alert('Error removing property. Please log in.');
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Error removing property:', error);
+                            });
+                    });
+                });
+            });
+        </script>
 
 
     </body>
