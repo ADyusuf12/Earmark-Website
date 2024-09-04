@@ -25,6 +25,7 @@ urlpatterns = [
     path('', include('e_web.apps.public.urls')),
     path("accounts/", include('e_web.apps.accounts.urls')),
     path("contact/", include('e_web.apps.contact.urls')),
+    path("blog/", include('e_web.apps.blog.urls')),
     
 
 

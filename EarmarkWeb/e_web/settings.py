@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'e_web.apps.accounts',
     'e_web.apps.public',
     'e_web.apps.contact',
+    'e_web.apps.blog',
 ]
 
 MIDDLEWARE = [

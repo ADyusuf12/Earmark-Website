@@ -64,9 +64,8 @@
 </header>
 <!-- End header section -->
 
-<!-- Start menu section -->
 <section id="aa-menu-area">
-  <nav class="navbar navbar-default main-navbar navbar" role="navigation">
+  <nav class="navbar navbar-default main-navbar" role="navigation">
     <div class="container">
       <div class="navbar-header">
         <!-- FOR MOBILE VIEW COLLAPSED BUTTON -->
@@ -79,75 +78,43 @@
         </button>
         <!-- LOGO -->
         <!-- Text based logo -->
-        <a> {% url 'public:index' as index_url %}{% if request.path == index_url %}{% else %}<a
-            class="navbar-brand aa-logo" href="{{ index_url }}"> EARMARK INVESTMENT</a>{% endif %}</span></a>
+        <a class="navbar-brand aa-logo" href="{% url 'public:index' %}">Earmark <span>Investment</span></a>
         <!-- Image based logo -->
         <!-- <a class="navbar-brand aa-logo-img" href="index.html"><img src="img/logo.png" alt="logo"></a> -->
       </div>
       <div id="navbar" class="navbar-collapse collapse">
         <ul id="top-menu" class="nav navbar-nav navbar-right aa-main-nav">
-          <span>
-            <li>
-              {% url 'public:index' as index_url %}
-              <span>{% if request.path == index_url %}{% else %}<a href="{{ index_url }}">HOME</a>{% endif %}</span>
-            </li>
-          </span>
+          <li class="{% if request.path == 'public:index' %}active{% endif %}">
+            <a href="{% url 'public:index' %}">HOME</a>
+          </li>
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="{% url 'public:properties_list' %}">PROPERTIES
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="{% url 'public:properties_list' %}">PROPERTIES</a></li>
+              <li><a href="{% url 'public:saved_listings' %}">SAVED PROPERTIES</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="{% url 'public:gallery' %}">GALLERY</a>
+          </li>
 
-          <span>
-            <li>
-              {% url 'public:properties_list' as properties_list_url %}
-              <span>
-                {% if request.path == properties_list_url %}PROPERTIES{% else %}
-                <a href="{{ properties_list_url }}">PROPERTIES
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="{% url 'blog:blog' %}">BLOG
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="{% url 'blog:blog' %}">BLOG</a></li>
 
-                </a>{%endif %}
-              </span>
-            </li>
-          </span>
-          <span>
-            <li>
-              {% url 'public:saved_listings' as saved_listings_url %}
-              <span>
-                {% if request.path == saved_listings_url %}SAVED PROPERTIES{% else %}
-                <a href="{{ saved_listings_url }}">SAVED PROPERTIES
-
-                </a>{%endif %}
-              </span>
-            </li>
-          </span>
-
-          <span>
-            <li>
-              {% url 'public:gallery' as gallery_url %}
-              <span>{% if request.path == gallery_url %}GALLERY{% else %}<a href="{{ gallery_url }}">GALLERY</a>
-                {% endif %}
-
-              </span>
-            </li>
-          </span>
-          <span>
-            <li>
-              {% url 'public:blog' as blog_url %} <span>
-                {% if request.path == blog_url %}BLOG{% else %}<a href="{{ blog_url }}">BLOG</a>{% endif %}</span></a>
-
-            </li>
-          </span>
-          <span>
-            <li>
-              {% url 'contact:contact' as contact_url %}
-              <span>{% if request.path == contact_url %}CONTACT{% else %}<a href="{{ contact_url }}">CONTACT</a>
-                {% endif %}
-              </span>
-            </li>
-          </span>
-
-
-
-
+            </ul>
+          </li>
+          <li>
+            <a href="{% url 'contact:contact' %}">CONTACT</a>
+          </li>
 
         </ul>
       </div>
     </div>
   </nav>
 </section>
-<!-- End menu section -->

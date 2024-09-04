@@ -10,7 +10,6 @@ from .views import SavedListingsView, unsave_listing_view, save_listing_view
 app_name="public"
 urlpatterns = [
     path('', views.index, name="index"),
-    path('blog', views.blog, name="blog"),
     path('gallery', views.gallery, name="gallery"),
     path('error_page', views.error_page, name="error_page"),
     path('properties_list', views.properties_list, name="properties_list"),

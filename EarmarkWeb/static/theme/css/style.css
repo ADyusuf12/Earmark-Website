@@ -40,21 +40,6 @@
 
 
 
-.save-button {
-  background-color: #007bff;
-  color: #ffffff;
-  border: none;
-  padding: 10px 20px;
-  font-size: 14px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.save-button:hover {
-  background-color: #0056b3;
-}
-
-
 
 .aa-profile-content {
   position: absolute;
@@ -156,6 +141,30 @@ h2 {
 
 img {
   border: none;
+}
+
+.save-listing-btn {
+  font-size: 16px;
+  color: #f30707;
+  margin-top: 5px;
+  display: inline-block;
+  -webkit-transition: 0.5s;
+  -moz-transition: 0.5s;
+  -ms-transition: 0.5s;
+  -o-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.unsave-button {
+  font-size: 16px;
+  color: #050505;
+  margin-top: 5px;
+  display: inline-block;
+  -webkit-transition: 0.5s;
+  -moz-transition: 0.5s;
+  -ms-transition: 0.5s;
+  -o-transition: 0.5s;
+  transition: 0.5s;
 }
 
 .aa-primary-btn {
@@ -936,13 +945,6 @@ img {
   top: -15px;
 }
 
-.aa-properties-item .save {
-  background-color: #ded9e2;
-}
-
-.aa-properties-item .unsave {
-  background-color: #6320ce;
-}
 
 .aa-properties-item .for-rent {
   background-color: #20ceb3;
