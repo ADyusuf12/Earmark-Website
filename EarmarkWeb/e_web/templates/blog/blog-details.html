@@ -89,107 +89,6 @@
                           </ul>
                         </div>
                       </div>
-                      <!-- Respond box -->
-                      <div class="col-md-12">
-                        <div id="respond">
-                          <h3 class="reply-title">Leave a Comment</h3>
-                          <form id="commentform">
-
-                            <p class="comment-form-comment">
-                              <label for="comment">Comment</label>
-                              <textarea required="required" aria-required="true" rows="8" cols="45"
-                                name="comment"></textarea>
-                            </p>
-                            <p class="form-allowed-tags">
-                              You may use these <abbr title="HyperText Markup Language">HTML</abbr> tags and attributes:
-                              <code>&lt;a href="" title=""&gt; &lt;abbr title=""&gt; &lt;acronym title=""&gt; &lt;b&gt; &lt;blockquote cite=""&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=""&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=""&gt; &lt;s&gt; &lt;strike&gt; &lt;strong&gt; </code>
-                            </p>
-                            <p class="form-submit">
-                              <input type="submit" value="Post Comment" class="aa-browse-btn" name="submit">
-                            </p>
-                          </form>
-                        </div>
-                      </div>
-                      <!-- Social Share -->
-                      <div class="col-md-12">
-                        <div class="aa-properties-social">
-                          <ul>
-                            <li>Share</li>
-                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                            <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
-                          </ul>
-                        </div>
-                      </div>
-                      <!-- post navigation -->
-                      <div class="col-md-12">
-                        <div class="aa-blog-navigation">
-                          <div class="aa-blog-pagination-left">
-                            <a href="#" class="aa-prev">
-                              <span class="fa fa-angle-double-left">
-                              </span>
-                              PREV
-                            </a>
-                          </div>
-                          <div class="aa-blog-pagination-right">
-                            <a href="#" class="aa-next">
-                              NEXT
-                              <span class="fa fa-angle-double-right">
-                              </span>
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                      <!-- Related blog post -->
-                      <div class="col-md-12">
-                        <div class="aa-blog-related-post">
-                          <div class="aa-title">
-                            <h2>Related Post</h2>
-                            <span></span>
-                          </div>
-                          <div class="aa-blog-related-post-area">
-                            <div class="row">
-                              <div class="col-md-6 col-sm-6">
-                                <article class="aa-blog-single">
-                                  <figure class="aa-blog-img">
-                                    <a href="#"><img src="img/blog-img-1.jpg" alt="img"></a>
-                                    <span class="aa-date-tag">15 April, 16</span>
-                                  </figure>
-                                  <div class="aa-blog-single-content">
-                                    <h3><a href="#">Lorem ipsum dolor sit amet, consectetur.</a></h3>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio est quaerat
-                                      magnam exercitationem voluptas, voluptatem sed quam ab laborum voluptatum tempore
-                                      dolores itaque, molestias vitae.</p>
-                                    <div class="aa-blog-single-bottom">
-                                      <a href="#" class="aa-blog-author"><i class="fa fa-user"></i> Admin</a>
-                                      <a href="#" class="aa-blog-comments"><i class="fa fa-comment-o"></i>6</a>
-                                    </div>
-                                  </div>
-                                </article>
-                              </div>
-                              <div class="col-md-6 col-sm-6">
-                                <article class="aa-blog-single">
-                                  <figure class="aa-blog-img">
-                                    <a href="#"><img src="img/blog-img-2.jpg" alt="img"></a>
-                                    <span class="aa-date-tag">15 April, 16</span>
-                                  </figure>
-                                  <div class="aa-blog-single-content">
-                                    <h3><a href="#">Lorem ipsum dolor sit amet, consectetur.</a></h3>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio est quaerat
-                                      magnam exercitationem voluptas, voluptatem sed quam ab laborum voluptatum tempore
-                                      dolores itaque, molestias vitae.</p>
-                                    <div class="aa-blog-single-bottom">
-                                      <a href="#" class="aa-blog-author"><i class="fa fa-user"></i> Admin</a>
-                                      <a href="#" class="aa-blog-comments"><i class="fa fa-comment-o"></i>6</a>
-                                    </div>
-                                  </div>
-                                </article>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
                       <!-- comment threats -->
                       <div class="col-md-12">
                         <div class="aa-comments-area">
@@ -218,6 +117,107 @@
 
 
                             </ul>
+                            <!-- Respond box -->
+                            <div class="col-md-12">
+                              <div id="respond">
+                                <h3 class="reply-title">Leave a Comment</h3>
+                                <form id="commentform" method="post">
+                                  {% csrf_token %}
+
+                                  <p class="comment-form-comment">
+
+                                    <span>{{ comment_form }}</span>
+                                  </p>
+
+                                  <p class="form-submit">
+                                    <input type="submit" value="Post Comment" class="aa-browse-btn" name="submit">
+                                  </p>
+                                </form>
+                              </div>
+                            </div>
+                            <!-- Social Share -->
+                            <div class="col-md-12">
+                              <div class="aa-properties-social">
+                                <ul>
+                                  <li>Share</li>
+                                  <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                  <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                  <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                  <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                                </ul>
+                              </div>
+                            </div>
+                            <!-- post navigation -->
+                            <div class="col-md-12">
+                              <div class="aa-blog-navigation">
+                                <div class="aa-blog-pagination-left">
+                                  <a href="#" class="aa-prev">
+                                    <span class="fa fa-angle-double-left">
+                                    </span>
+                                    PREV
+                                  </a>
+                                </div>
+                                <div class="aa-blog-pagination-right">
+                                  <a href="#" class="aa-next">
+                                    NEXT
+                                    <span class="fa fa-angle-double-right">
+                                    </span>
+                                  </a>
+                                </div>
+                              </div>
+                            </div>
+                            <!-- Related blog post -->
+                            <div class="col-md-12">
+                              <div class="aa-blog-related-post">
+                                <div class="aa-title">
+                                  <h2>Related Post</h2>
+                                  <span></span>
+                                </div>
+                                <div class="aa-blog-related-post-area">
+                                  <div class="row">
+                                    <div class="col-md-6 col-sm-6">
+                                      <article class="aa-blog-single">
+                                        <figure class="aa-blog-img">
+                                          <a href="#"><img src="img/blog-img-1.jpg" alt="img"></a>
+                                          <span class="aa-date-tag">15 April, 16</span>
+                                        </figure>
+                                        <div class="aa-blog-single-content">
+                                          <h3><a href="#">Lorem ipsum dolor sit amet, consectetur.</a></h3>
+                                          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio est quaerat
+                                            magnam exercitationem voluptas, voluptatem sed quam ab laborum voluptatum
+                                            tempore
+                                            dolores itaque, molestias vitae.</p>
+                                          <div class="aa-blog-single-bottom">
+                                            <a href="#" class="aa-blog-author"><i class="fa fa-user"></i> Admin</a>
+                                            <a href="#" class="aa-blog-comments"><i class="fa fa-comment-o"></i>6</a>
+                                          </div>
+                                        </div>
+                                      </article>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6">
+                                      <article class="aa-blog-single">
+                                        <figure class="aa-blog-img">
+                                          <a href="#"><img src="img/blog-img-2.jpg" alt="img"></a>
+                                          <span class="aa-date-tag">15 April, 16</span>
+                                        </figure>
+                                        <div class="aa-blog-single-content">
+                                          <h3><a href="#">Lorem ipsum dolor sit amet, consectetur.</a></h3>
+                                          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio est quaerat
+                                            magnam exercitationem voluptas, voluptatem sed quam ab laborum voluptatum
+                                            tempore
+                                            dolores itaque, molestias vitae.</p>
+                                          <div class="aa-blog-single-bottom">
+                                            <a href="#" class="aa-blog-author"><i class="fa fa-user"></i> Admin</a>
+                                            <a href="#" class="aa-blog-comments"><i class="fa fa-comment-o"></i>6</a>
+                                          </div>
+                                        </div>
+                                      </article>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+
                             <!-- comments pagination -->
                             <nav>
                               <ul class="pagination comments-pagination">

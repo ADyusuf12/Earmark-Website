@@ -1,8 +1,8 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import BlogPost, Comment
-from .forms import BlogPostForm
+from .forms import BlogPostForm, CommentForm
 
 
 def blog(request):
@@ -16,13 +16,23 @@ def blog(request):
     
 
 def blog_details(request, post_id):
-    # Retrieve the specific blog post based on post_id
     blog_post = get_object_or_404(BlogPost, id=post_id)
-
-    # Retrieve related comments using the default related name (comment_set)
     comments = blog_post.comment_set.all()
-
-    context = {'blog_post': blog_post, 'comments': comments}
+    comment_form = CommentForm()
+    
+    if request.method == 'POST':
+        comment_form = CommentForm(request.POST)
+        if comment_form.is_valid():
+            new_comment = comment_form.save(commit=False)
+            new_comment.blog_post = blog_post
+            new_comment.author = request.user
+            new_comment.save()
+            return redirect('blog/blog_details', post_id=post_id)
+    context = {
+        'blog_post': blog_post,
+        'comments': comments,
+        'comment_form': comment_form,
+    }
     return render(request, 'blog/blog-details.html', context)
 
 class BlogPostCreateView(CreateView, LoginRequiredMixin):
