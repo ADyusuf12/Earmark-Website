@@ -89,10 +89,17 @@
               <div class="aa-properties-content-body">
                 <ul class="aa-properties-nav">
                   {% for listing in listings %}
+
                   <li>
                     <article class="aa-properties-item">
                       <a class="aa-properties-item-img" href="#">
-                        <img alt="img" src="{{ listing.image.url }}">
+
+                        {% if listing.first_image_url %}
+                        <img src="{{ listing.first_image_url }}" alt="First Property Image">
+                        {% else %}
+                        <p>{{ listing.first_image_url }}</p>
+                        {% endif %}
+
                       </a>
                       <div class="aa-tag for-rent">
                         {{ listing.status }}
@@ -278,7 +285,7 @@
                 <div class="media">
                   <div class="media-left">
                     <a href="#">
-                      <img class="media-object" src="{{ listing.image.url }}" alt="img">
+                      <img class="media-object" src="{{ listing.image_url }}" alt="Property Image">
                     </a>
                   </div>
                   <div class="media-body">

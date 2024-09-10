@@ -4,7 +4,7 @@ from django.core.paginator import Paginator
 from django.http import HttpResponseForbidden, JsonResponse
 from django.contrib.auth.decorators import login_required
 from . decorators import user_has_permission
-from .models import Properties_Listing
+from .models import Properties_Listing, PropertyImage
 from .forms import Properties_ListingForm, PropertySearchForm
 from django.views.generic import ListView
 
@@ -64,12 +64,18 @@ def properties_list(request):
     # Fetch popular properties
     popular_listings = Properties_Listing.objects.order_by('-views')[:3]
     
+    for listing in listings:
+        first_image = PropertyImage.objects.filter(listing=listing).first()
+        listing.first_image_url = first_image.image.url if first_image else None
+        print(f"Listing {listing.id} - First Image URL: {listing.first_image_url}")
+    
     
     context = {
         "listings": page_obj,
         "form": form,
         "page_obj": page_obj,
         "popular_listings": popular_listings
+        
     }
     return render(request, 'properties.html', context)
 
@@ -81,11 +87,14 @@ def properties_list_retrieve(request, pk):
 
     # Retrieve the users who have saved this property
     saved_users = listing.saved_by_users.all()
+    
+    property_images = PropertyImage.objects.filter(listing=listing)
 
     context = {
         "listing": listing,
         "popular_listings": popular_listings,
         "saved_users": saved_users,
+        "property_images": property_images
     }
     return render(request, 'properties-detail.html', context)
 
@@ -133,6 +142,9 @@ def properties_list_create(request):
             listing = form.save(commit=False)
             listing.user = request.user
             listing.save()
+            
+            for image in request.FILES.getlist('images'):
+                PropertyImage.objects.create(listing=listing, image=image)
             return redirect("/properties_list")
     else:
         form = Properties_ListingForm()

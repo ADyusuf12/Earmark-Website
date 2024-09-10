@@ -13,9 +13,10 @@ class Properties_Listing(models.Model):
     parking_space = models.IntegerField(null=True, blank=True)
     bedrooms = models.IntegerField(null=True, blank=True)
     bathrooms = models.IntegerField(null=True, blank=True)
-    sqm = models.IntegerField()
+    size = models.IntegerField()
     address = models.CharField(max_length=200)
-    image = models.ImageField()
+    certificate_num = models.CharField(max_length=64)
+    reference_num = models.CharField(max_length=64)
     description = models.CharField(max_length=500)
     # video = models.FileField()
     google_map = models.CharField(max_length=500)
@@ -44,3 +45,11 @@ class Properties_Listing(models.Model):
     
     def __str__(self):
         return self.title
+    
+    
+class PropertyImage(models.Model):
+    listing = models.ForeignKey(Properties_Listing, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='property_images/')
+
+    def __str__(self):
+        return f"Image for {self.listing.title}"

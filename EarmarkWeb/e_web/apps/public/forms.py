@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from .models import Properties_Listing
+from .models import Properties_Listing, PropertyImage
 from django import forms
 
 class Properties_ListingForm(ModelForm):
@@ -7,20 +7,29 @@ class Properties_ListingForm(ModelForm):
         model = Properties_Listing
         fields = [
             "title",
+            "description",
+            "address",
+            "certificate_num",
+            "reference_num", 
+            "google_map",
+            "location",
+            "status",
             "category",
+            "size",
             "price",
-            "parking_space",
             "bedrooms",
             "bathrooms",
-            "sqm",
-            "address",
-            "image",
-            # "video",
-            "google_map",
-            "description",
-            "status",
-            "location",
+            "parking_space",
+            # "video",,
         ]
+        help_texts = {
+            'size': 'Size in squaremeter'
+        }
+        
+class PropertyImageForm(forms.ModelForm):
+    class Meta:
+        model = PropertyImage
+        fields = ['image']
         
 
 class PropertySearchForm(forms.Form):

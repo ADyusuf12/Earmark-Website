@@ -65,9 +65,9 @@
                             <!-- Start properties content body -->
                             <div class="aa-properties-details">
                                 <div class="aa-properties-details-img">
-                                    <img src="{{ listing.image.url }}" alt="img">
-                                    <img src="{% static 'theme/img/slider/2.jpg' %}" alt="img">
-                                    <img src="{% static 'theme/img/slider/3.jpg' %}" alt="img">
+                                    {% for image in property_images %}
+                                    <img src="{{ image.image.url }}" alt="Property Image">
+                                    {% endfor %}
                                 </div>
                                 <div class="aa-properties-info">
                                     <button id="save-listing-btn" class="aa-primary-btn">Save Listing</button>
@@ -299,7 +299,8 @@
                                 <div class="media">
                                     <div class="media-left">
                                         <a href="#">
-                                            <img class="media-object" src="{{ listing.image.url }}" alt="img">
+                                            <img class="media-object" src="{{ listing.first_image_url }}"
+                                                alt="Property Image">
                                         </a>
                                     </div>
                                     <div class="media-body">
