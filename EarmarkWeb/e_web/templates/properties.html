@@ -93,13 +93,7 @@
                   <li>
                     <article class="aa-properties-item">
                       <a class="aa-properties-item-img" href="#">
-
-                        {% if listing.first_image_url %}
-                        <img src="{{ listing.first_image_url }}" alt="First Property Image">
-                        {% else %}
-                        <p>{{ listing.first_image_url }}</p>
-                        {% endif %}
-
+                        <img src="{{ listing.images.first.image.url }}" alt="Property Image">
                       </a>
                       <div class="aa-tag for-rent">
                         {{ listing.status }}
@@ -117,7 +111,7 @@
                           <span>{{ listing.bathrooms }} Baths</span>
                           {% endif %}
 
-                          <span>{{ listing.sqm }} sqm</span>
+                          <span>{{ listing.size }} sqm</span>
 
                           {% if listing.parking_space %}
                           <span>{{ listing.parking_space }} Parking Space</span>
@@ -285,7 +279,7 @@
                 <div class="media">
                   <div class="media-left">
                     <a href="#">
-                      <img class="media-object" src="{{ listing.image_url }}" alt="Property Image">
+                      <img class="media-object" src="{{ listing.images.first.image.url }}" alt="Property Image">
                     </a>
                   </div>
                   <div class="media-body">

@@ -64,23 +64,19 @@ def properties_list(request):
     # Fetch popular properties
     popular_listings = Properties_Listing.objects.order_by('-views')[:3]
     
-    for listing in listings:
-        first_image = PropertyImage.objects.filter(listing=listing).first()
-        listing.first_image_url = first_image.image.url if first_image else None
-        print(f"Listing {listing.id} - First Image URL: {listing.first_image_url}")
     
     
     context = {
         "listings": page_obj,
         "form": form,
         "page_obj": page_obj,
-        "popular_listings": popular_listings
-        
+        "popular_listings": popular_listings,
     }
     return render(request, 'properties.html', context)
 
 def properties_list_retrieve(request, pk):
     listing = Properties_Listing.objects.get(id=pk)
+    print(dir(listing))
     listing.views += 1
     listing.save()
     popular_listings = Properties_Listing.objects.order_by('-views')[:3]

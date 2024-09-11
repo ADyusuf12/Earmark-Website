@@ -48,7 +48,7 @@ class Properties_Listing(models.Model):
     
     
 class PropertyImage(models.Model):
-    listing = models.ForeignKey(Properties_Listing, on_delete=models.CASCADE)
+    listing = models.ForeignKey(Properties_Listing, on_delete=models.CASCADE, related_name='images')
     image = models.ImageField(upload_to='property_images/')
 
     def __str__(self):
