@@ -7,16 +7,19 @@ from .forms import BlogPostForm, CommentForm
 
 def blog(request):
     blog_posts = BlogPost.objects.all()
+    latest_posts = BlogPost.objects.order_by('date_created')
     for post in blog_posts:
         post.comment_count = Comment.objects.filter(blog_post=post).count()
     context = {
         'blog_posts': blog_posts,
+        'latest_posts': latest_posts
     }
     return render(request, 'blog/blog.html', context)
     
 
 def blog_details(request, post_id):
     blog_post = get_object_or_404(BlogPost, id=post_id)
+    latest_posts = BlogPost.objects.order_by('date_created')
     comments = blog_post.comment_set.all()
     comment_form = CommentForm()
     
@@ -32,6 +35,7 @@ def blog_details(request, post_id):
         'blog_post': blog_post,
         'comments': comments,
         'comment_form': comment_form,
+        'latest_posts': latest_posts
     }
     return render(request, 'blog/blog-details.html', context)
 

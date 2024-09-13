@@ -76,7 +76,7 @@ def properties_list(request):
 
 def properties_list_retrieve(request, pk):
     listing = Properties_Listing.objects.get(id=pk)
-    print(dir(listing))
+    
     listing.views += 1
     listing.save()
     popular_listings = Properties_Listing.objects.order_by('-views')[:3]

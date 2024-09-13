@@ -60,7 +60,7 @@
                 <div class="col-md-8">
                   <div class="aa-blog-content">
                     <div class="row">
-                      {% for post in blog_posts%}
+                      {% for post in blog_posts %}
 
                       <div class="col-md-6 col-sm-6">
                         <article class="aa-blog-single">
@@ -167,44 +167,22 @@
                     <!-- Start single sidebar -->
                     <div class="aa-blog-sidebar-single">
                       <h3>Recent Post</h3>
+                      {% for post in latest_posts %}
                       <div class="aa-blog-recent-post">
                         <div class="media">
                           <div class="media-left">
                             <a href="#">
-                              <img alt="img" src="{% static 'theme/img/blog-img-3.jpg' %}" class="media-object">
+                              <img alt="img" src="{{post.image.url}}" class="media-object">
                             </a>
                           </div>
                           <div class="media-body">
-                            <h4 class="media-heading"><a href="#">This is Title</a></h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                            <span>15 April, 16</span>
-                          </div>
-                        </div>
-                        <div class="media">
-                          <div class="media-left">
-                            <a href="#">
-                              <img alt="img" src="{% static 'theme/img/blog-img-2.jpg' %}" class="media-object">
-                            </a>
-                          </div>
-                          <div class="media-body">
-                            <h4 class="media-heading"><a href="#">This is Title</a></h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                            <span>15 April, 16</span>
-                          </div>
-                        </div>
-                        <div class="media">
-                          <div class="media-left">
-                            <a href="#">
-                              <img alt="img" src="{% static 'theme/img/blog-img-1.jpg' %}" class="media-object">
-                            </a>
-                          </div>
-                          <div class="media-body">
-                            <h4 class="media-heading"><a href="#">This is Title</a></h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                            <span>15 April, 16</span>
+                            <h4 class="media-heading"><a href="">{{ post.title }}</a></h4>
+                            <p>{{ post.description }}</p>
+                            <span>{{ post.date_created }}</span>
                           </div>
                         </div>
                       </div>
+                      {% endfor %}
                     </div>
                     <!-- Start single sidebar -->
                     <div class="aa-blog-sidebar-single">
