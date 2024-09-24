@@ -7,6 +7,7 @@ from . decorators import user_has_permission
 from .models import Properties_Listing, PropertyImage
 from .forms import Properties_ListingForm, PropertySearchForm
 from django.views.generic import ListView
+from e_web.apps.blog.models import BlogPost
 
 
 
@@ -15,8 +16,10 @@ from django.views.generic import ListView
 
 def index(request):
     latest_listings = Properties_Listing.objects.order_by('-created_at')[:3]
+    latest_posts = BlogPost.objects.order_by('date_created')[:3]
     context = {
-        "latest_listings": latest_listings
+        "latest_listings": latest_listings,
+        "latest_posts": latest_posts
         
     }
     return render(request, 'index.html', context)

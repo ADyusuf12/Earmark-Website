@@ -70,7 +70,7 @@
                             <span class="aa-date-tag">{{post.date_created}}</span>
                           </figure>
                           <div class="aa-blog-single-content">
-                            <h3><a href="#">{{post.title}}</a></h3>
+                            <h3><a href="{{ post.id }}">{{post.title}}</a></h3>
                             <p>{{ post.description }}</p>
                             <div class="aa-blog-single-bottom">
                               <a class="aa-blog-author" href="#"><i class="fa fa-user"></i>{{ post.user.username}}</a>

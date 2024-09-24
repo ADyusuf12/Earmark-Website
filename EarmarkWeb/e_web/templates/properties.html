@@ -92,7 +92,7 @@
 
                   <li>
                     <article class="aa-properties-item">
-                      <a class="aa-properties-item-img" href="#">
+                      <a class="aa-properties-item-img" href="/properties_list/{{ listing.id }}">
                         <img src="{{ listing.images.first.image.url }}" alt="Property Image">
                       </a>
                       <div class="aa-tag for-rent">
@@ -118,7 +118,7 @@
                           {% endif %}
                         </div>
                         <div class="aa-properties-about">
-                          <h3><a href="#">{{ listing.title }}</a></h3>
+                          <h3><a href="/properties_list/{{ listing.id }}">{{ listing.title }}</a></h3>
                           <strong>
                             <i class="fa fa-map-marker"></i>
                             {{ listing.location }}
