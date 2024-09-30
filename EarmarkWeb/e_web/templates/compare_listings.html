@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}COMPARE PROPERTIES{% endblock %}
+
+{% block content %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    </head>
+
+    <body class="aa-price-range">
+        <!-- Pre Loader -->
+        <div id="aa-preloader-area">
+            <div class="pulse"></div>
+        </div>
+        <!-- SCROLL TOP BUTTON -->
+        <a class="scrollToTop" href="#"><i class="fa fa-angle-double-up"></i></a>
+        <!-- END SCROLL TOP BUTTON -->
+
+
+        <!-- Start Property header  -->
+        <section id="aa-property-header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="aa-property-header-inner">
+                            <h2>Saved Properties</h2>
+                            <ol class="breadcrumb">
+                                <li>
+                                    {% url 'public:index' as index_url %}{% if request.path == index_url %}{% else %}<a
+                                        href="{{ index_url }}">HOME</a>{% endif %}</span></a>
+                                </li>
+
+
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End Property header  -->
+        <section id="aa-properties">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-11">
+                        <div class="aa-properties-content">
+                            <h1>Property Comparison</h1>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Property</th>
+                                        <th>Price</th>
+                                        <th>Bedrooms</th>
+                                        <th>Bathrooms</th>
+                                        <!-- Add other relevant attributes for comparison -->
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for listing in listings_to_compare %}
+                                    <tr>
+                                        <td>{{ listing.title }}</td>
+                                        <td>₦{{ listing.price }}</td>
+                                        <td>{{ listing.bedrooms }} Beds</td>
+                                        <td>{{ listing.bathrooms }} Baths</td>
+                                        <td>{{ listing.size }} sqm</td>
+                                        <td>{{ listing.parking_space }} Parking Space</td>
+                                        <!-- Add other attributes here -->
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </body>
+
+</html>
+{% endblock %}

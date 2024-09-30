@@ -92,7 +92,7 @@
                                     <li>
                                         <article class="aa-properties-item">
                                             <a class="aa-properties-item-img" href="#">
-                                                <img alt="img" src="{{ listing.image.url }}">
+                                                <img alt="img" src="{{ listing.images.first.image.url }}">
                                             </a>
                                             <div class="aa-tag for-rent">
                                                 {{ listing.status }}
@@ -110,7 +110,7 @@
                                                     <span>{{ listing.bathrooms }} Baths</span>
                                                     {% endif %}
 
-                                                    <span>{{ listing.sqm }} sqm</span>
+                                                    <span>{{ listing.size }} sqm</span>
 
                                                     {% if listing.parking_space %}
                                                     <span>{{ listing.parking_space }} Parking Space</span>
@@ -130,11 +130,40 @@
                                                         href="/properties_list/{{ listing.id }}">View Details</a>
                                                 </div>
                                             </div>
+                                            <input type="checkbox" name="selected_properties" value="{{ listing.id }}">
+                                            <button id="compare-button">Compare Selected Properties</button>
                                         </article>
                                     </li>
                                     {% endfor %}
                                 </ul>
+                                <aside id="comparison-aside">
+                                    <table class="comparison-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Title</th>
+                                                <th>Bedrooms</th>
+                                                <th>Bathrooms</th>
+                                                <th>Size (sqm)</th>
+                                                <th>Parking Space</th>
+                                                <th>Price (₦)</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for listing in saved_listings %}
+                                            <tr>
+                                                <td>{{ listing.title }}</td>
+                                                <td>{{ listing.bedrooms }}</td>
+                                                <td>{{ listing.bathrooms }}</td>
+                                                <td>{{ listing.size }}</td>
+                                                <td>{{ listing.parking_space }}</td>
+                                                <td>₦{{ listing.price }}</td>
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </aside>
                             </div>
+
                             <!-- Start properties sidebar -->
 
                             <div class="col-md-4">
@@ -326,6 +355,18 @@
                             });
                     });
                 });
+            });
+
+            document.getElementById('compare-button').addEventListener('click', function () {
+                const selectedPropertyIds = Array.from(document.querySelectorAll('input[name="selected_properties"]:checked'))
+                    .map(checkbox => checkbox.value);
+
+                // Fetch property details (e.g., via AJAX or from existing data)
+                // Compare the features (bedrooms, bathrooms, size, etc.) of the selected properties
+
+                // Display the comparison results in an aside tag
+                const comparisonResults = 'Comparison results go here'; // You'll need to format this appropriately
+                document.getElementById('comparison-aside').innerHTML = comparisonResults;
             });
         </script>
 
