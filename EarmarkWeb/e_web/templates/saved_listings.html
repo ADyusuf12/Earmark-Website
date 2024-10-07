@@ -137,6 +137,7 @@
                                     {% endfor %}
                                 </ul>
                                 <aside id="comparison-aside">
+                                    <button id="clear-comparison-button">Clear Comparison</button>
                                     <table class="comparison-table">
                                         <thead>
                                             <tr>
@@ -367,6 +368,15 @@
                 // Display the comparison results in an aside tag
                 const comparisonResults = 'Comparison results go here'; // You'll need to format this appropriately
                 document.getElementById('comparison-aside').innerHTML = comparisonResults;
+            });
+            document.getElementById('clear-comparison-button').addEventListener('click', function () {
+                // Clear the comparison results (the table body)
+                const comparisonTableBody = document.querySelector('.comparison-table tbody');
+                comparisonTableBody.innerHTML = '';
+
+                // Optionally, reset any other state related to the comparison (e.g., selected properties array)
+
+
             });
         </script>
 
