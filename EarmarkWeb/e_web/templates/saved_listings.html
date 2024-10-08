@@ -131,37 +131,23 @@
                                                 </div>
                                             </div>
                                             <input type="checkbox" name="selected_properties" value="{{ listing.id }}">
-                                            <button id="compare-button">Compare Selected Properties</button>
+
                                         </article>
                                     </li>
                                     {% endfor %}
                                 </ul>
                                 <aside id="comparison-aside">
+                                    <button id="compare-button">Compare Selected Properties</button>
                                     <button id="clear-comparison-button">Clear Comparison</button>
                                     <table class="comparison-table">
-                                        <thead>
-                                            <tr>
-                                                <th>Title</th>
-                                                <th>Bedrooms</th>
-                                                <th>Bathrooms</th>
-                                                <th>Size (sqm)</th>
-                                                <th>Parking Space</th>
-                                                <th>Price (₦)</th>
-                                            </tr>
-                                        </thead>
+
                                         <tbody>
-                                            {% for listing in saved_listings %}
-                                            <tr>
-                                                <td>{{ listing.title }}</td>
-                                                <td>{{ listing.bedrooms }}</td>
-                                                <td>{{ listing.bathrooms }}</td>
-                                                <td>{{ listing.size }}</td>
-                                                <td>{{ listing.parking_space }}</td>
-                                                <td>₦{{ listing.price }}</td>
-                                            </tr>
-                                            {% endfor %}
+
                                         </tbody>
+
                                     </table>
+
+
                                 </aside>
                             </div>
 
@@ -362,23 +348,110 @@
                 const selectedPropertyIds = Array.from(document.querySelectorAll('input[name="selected_properties"]:checked'))
                     .map(checkbox => checkbox.value);
 
-                // Fetch property details (e.g., via AJAX or from existing data)
-                // Compare the features (bedrooms, bathrooms, size, etc.) of the selected properties
+                const properties = [
+                    {% for listing in saved_listings %}
+                        {
+                    id: '{{ listing.id }}',
+                    title: '{{ listing.title }}',
+                    bedrooms: '{{ listing.bedrooms }}',
+                    bathrooms: '{{ listing.bathrooms }}',
+                    size: '{{ listing.size }}',
+                    parking_space: '{{ listing.parking_space }}',
+                    price: '{{ listing.price }}',
+                },
+                {% endfor %}
+                ];
 
-                // Display the comparison results in an aside tag
-                const comparisonResults = 'Comparison results go here'; // You'll need to format this appropriately
-                document.getElementById('comparison-aside').innerHTML = comparisonResults;
-            });
+            // Display the comparison results in an aside tag
+            const comparisonResults = selectedPropertyIds.map(propertyId => {
+                const property = properties.find(prop => prop.id === propertyId);
+                if (property) {
+                    return `
+                    <thead>
+            <tr>
+                <th>Title</th>
+                <th>Bedrooms</th>
+                <th>Bathrooms</th>
+                <th>Size (sqm)</th>
+                <th>Parking Space</th>
+                <th>Price (₦)</th>
+            </tr>
+        </thead>
+        <tbody>
+                <tr>
+                    <td>${property.title}</td>
+                    <td>${property.bedrooms}</td>
+                    <td>${property.bathrooms}</td>
+                    <td>${property.size} sqm</td>
+                    <td>${property.parking_space}</td>
+                    <td>₦${property.price.toLocaleString()}</td>
+                </tr>
+                <tbody/>
+            `;
+                }
+                return ''; // Handle cases where property is not found (optional)
+            }).join('');
+
+            // Display the comparison results in the table body
+            document.querySelector('.comparison-table tbody').innerHTML = comparisonResults;
+});
+
+
+
+
             document.getElementById('clear-comparison-button').addEventListener('click', function () {
                 // Clear the comparison results (the table body)
                 const comparisonTableBody = document.querySelector('.comparison-table tbody');
                 comparisonTableBody.innerHTML = '';
 
-                // Optionally, reset any other state related to the comparison (e.g., selected properties array)
-
-
             });
         </script>
+        <style>
+            .comparison-table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-top: 20px;
+            }
+
+            .comparison-table th,
+            .comparison-table td {
+                padding: 10px;
+                text-align: left;
+                border-bottom: 1px solid #ddd;
+            }
+
+            .comparison-table th {
+                background-color: #f5f5f5;
+                font-weight: bold;
+            }
+
+            /* Style the "Clear Comparison" button */
+            #clear-comparison-button {
+                background-color: #007bff;
+                color: #fff;
+                border: none;
+                padding: 8px 12px;
+                cursor: pointer;
+                font-size: 14px;
+                border-radius: 4px;
+                margin-top: 10px;
+            }
+
+            #compare-button {
+                background-color: #007bff;
+                color: #fff;
+                border: none;
+                padding: 8px 12px;
+                cursor: pointer;
+                font-size: 14px;
+                border-radius: 4px;
+                margin-top: 10px;
+            }
+
+            #clear-comparison-button:hover {
+                background-color: #0056b3;
+            }
+        </style>
 
 
     </body>
