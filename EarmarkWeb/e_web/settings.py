@@ -138,7 +138,7 @@ MEDIA_ROOT = 'media'
 
 LOGIN_URL = "accounts:login"
 LOGIN_REDIRECT_URL = "accounts:profile"
-LOGOUT_REDIRECT_URL = "public:index"
+LOGOUT_REDIRECT_URL = "accounts:login"
 
 REGISTER_URL = "accounts:register"
 REGISTER_REDIRCET_URL = "accounts:profile"
