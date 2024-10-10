@@ -62,6 +62,13 @@
 
                   <div class="aa-single-field">
                     <span class="fa fa-user"></span>
+                    <label>Account Type</label>
+                    <br>
+                    {{form.group}}
+                  </div>
+
+                  <div class="aa-single-field">
+                    <span class="fa fa-user"></span>
                     {{form.first_name.label}}
                     {{form.first_name}}
                   </div>
@@ -94,11 +101,7 @@
                     {{form.password2}}
                   </div>
 
-                  <div class="aa-single-field">
-                    <span class="fa fa-user"></span>
-                    <label>Account Type</label>
-                    {{form.group}}
-                  </div>
+
                   <div class="aa-single-submit">
                     <input type="submit" value="Create Account" class="aa-browse-btn" name="submit">
                     <h3>Already Have an Account? <span><a href="{% url 'accounts:login' %}"
