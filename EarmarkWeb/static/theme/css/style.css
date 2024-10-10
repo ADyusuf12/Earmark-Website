@@ -1617,7 +1617,7 @@ img {
 ====================*/
 
 #aa-property-header {
-  background-image: url("../img/property-header-bg.jpg");
+  /* background-image: url("../img/property-header-bg.jpg"); */
   background-attachment: fixed;
   background-position: center center;
   background-size: cover;
@@ -2961,6 +2961,7 @@ img {
   top: 0;
   overflow-y: auto;
   width: 100%;
+  margin-top: 100px
 }
 
 #aa-signin:before {

@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}Login{% endblock %}
+{% block title %}LOGIN{% endblock %}
 
 {% block content %}
 
@@ -15,6 +15,37 @@
     </head>
 
     <body>
+
+        <!-- SCROLL TOP BUTTON -->
+        <a class="scrollToTop" href="#"><i class="fa fa-angle-double-up"></i></a>
+        <!-- END SCROLL TOP BUTTON -->
+
+        <!-- Start Property header  -->
+        <section id="aa-property-header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="aa-property-header-inner">
+                            <h2>Profile Page</h2>
+                            <ol class="breadcrumb">
+                                <li>
+                                    {% url 'public:index' as index_url %}{% if request.path == index_url %}{% else %}
+                                    <a href="{{ index_url }}">HOME</a>{% endif %}
+                                </li>
+                                {% if user.is_active %}
+                                <li>
+                                    <span><a href="{% url 'accounts:profile-settings' %}">Profile Settings</a></span>
+                                </li> {% endif %}
+
+
+
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End Property header  -->
         <section id="aa-signin">
             <div class="container">
                 <div class="row">
