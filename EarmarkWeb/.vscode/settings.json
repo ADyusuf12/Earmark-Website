@@ -1,7 +1,0 @@
-{
-    "html.format.indentInnerHtml": true,
-    "html.format.indentHandlebars": true,
-    "python.analysis.extraPaths": [
-        "./e_web/apps"
-    ]
-}

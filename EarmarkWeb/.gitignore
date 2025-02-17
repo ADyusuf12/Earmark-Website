@@ -1,1 +1,14 @@
+# Virtual environment
+venv/
+env/
 .env
+
+# IDE-specific files
+.vscode/
+
+# Database files
+db.sqlite3
+
+# Static and media files
+static/
+media/
