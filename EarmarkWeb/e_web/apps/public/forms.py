@@ -10,7 +10,7 @@ class Properties_ListingForm(ModelForm):
             "description",
             "address",
             "certificate_num",
-            "reference_num", 
+            "reference_num",
             "google_map",
             "location",
             "status",
@@ -25,12 +25,12 @@ class Properties_ListingForm(ModelForm):
         help_texts = {
             'size': 'Size in squaremeter'
         }
-        
+
 class PropertyImageForm(forms.ModelForm):
     class Meta:
         model = PropertyImage
         fields = ['image']
-        
+
 
 class PropertySearchForm(forms.Form):
     location = forms.CharField(max_length=100, required=False)
