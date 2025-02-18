@@ -15,8 +15,11 @@ SECRET_KEY = 'django-insecure-zyv_&w$rz!(%bd&8!2r0=$=lpgln9@xt307n^#w0y2(l+c4_9x
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-# PythonAnywhere domain
-ALLOWED_HOSTS = ['earmarkinvest.pythonanywhere.com']
+
+if os.getenv('ENV') == 'PRODUCTION':
+    ALLOWED_HOSTS = ['earmarkinvest.pythonanywhere.com']
+else:
+    ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 # Application definition
 
@@ -66,19 +69,31 @@ WSGI_APPLICATION = 'e_web.wsgi.application'
 # Database configuration
 
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': config('DB_NAME'),
-        'USER': config('DB_USER'),
-        'PASSWORD': config('DB_PASSWORD'),
-        'HOST': config('DB_HOST'),
-        'PORT': config('DB_PORT', default='3306'),
-        'OPTIONS': {
-            'ssl': False,
-        },
+import os
+from decouple import config
+
+if os.getenv('ENV') == 'PRODUCTION':
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': config('DB_NAME'),
+            'USER': config('DB_USER'),
+            'PASSWORD': config('DB_PASSWORD'),
+            'HOST': config('DB_HOST'),
+            'PORT': config('DB_PORT', default='3306'),
+            'OPTIONS': {
+                'ssl': False,
+            },
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
+    }
+
 
 
 
