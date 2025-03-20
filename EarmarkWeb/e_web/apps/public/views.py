@@ -133,7 +133,7 @@ def unsave_listing_view(request, pk):
 
 
 @login_required(redirect_field_name="accounts/login")
-@user_has_permission('add_properties_listing')
+@user_has_permission('public.add_properties_listing')
 def properties_list_create(request):
     if request.method == "POST":
         form = Properties_ListingForm(request.POST, files=request.FILES)
@@ -154,7 +154,7 @@ def properties_list_create(request):
     return render(request, 'create.html', context)
 
 @login_required(redirect_field_name="accounts/login")
-@user_has_permission('change_properties_listing')
+@user_has_permission('public.change_properties_listing')
 def properties_list_update(request, pk):
     listing = get_object_or_404(Properties_Listing, id=pk)
     
@@ -175,7 +175,7 @@ def properties_list_update(request, pk):
     return render(request, 'update.html', context)
 
 @login_required(redirect_field_name="accounts/login")
-@user_has_permission('delete_properties_listing')
+@user_has_permission('public.delete_properties_listing')
 def deleteListing(request, pk):
     listing = get_object_or_404(Properties_Listing, id=pk)
     

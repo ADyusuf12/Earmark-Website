@@ -5,6 +5,7 @@ from .forms import RegisterForm, ProfileForm
 from django.contrib.auth.decorators import login_required
 from .models import UserProfile
 from e_web.apps.public.models import Properties_Listing
+from django.contrib import messages
 
 
 
@@ -33,13 +34,26 @@ def ProfileSettings(request):
     return render(request, 'accounts/profile-settings.html', context)
 
 def register(request):
-    form = RegisterForm()
-    
+    """
+    Handles user registration:
+    - Displays the registration form.
+    - Assigns the user to the selected group during registration.
+    - Adds success messages upon successful registration.
+    """
     if request.method == 'POST':
         form = RegisterForm(request.POST)
         if form.is_valid():
-           form.save()
-           return redirect('/accounts/login')
+            user = form.save()  # Saves the user and assigns them to the selected group
+            
+            # Add a success message
+            account_type = form.cleaned_data['account_type']
+            messages.success(request, f"Account created successfully! You are registered as a {account_type}. Please log in.")
+            
+            # Redirect the user to the login page after successful registration
+            return redirect('/accounts/login')
     else:
         form = RegisterForm()
+    
+    # Render the registration form page
     return render(request, 'register.html', {'form': form})
+

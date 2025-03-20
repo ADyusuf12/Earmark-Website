@@ -56,69 +56,66 @@
                 </div>
 
 
-                <!-- FORM  -->
+                <!-- FORM -->
                 <form method="POST" action="">
                   {% csrf_token %}
 
                   <div class="aa-single-field">
                     <span class="fa fa-user"></span>
-                    <label>Account Type</label>
+                    <label for="id_account_type">Account Type</label>
                     <br>
-                    {{form.group}}
+                    {{ form.account_type }}
                   </div>
 
                   <div class="aa-single-field">
                     <span class="fa fa-user"></span>
-                    {{form.first_name.label}}
-                    {{form.first_name}}
+                    {{ form.first_name.label_tag }}
+                    {{ form.first_name }}
                   </div>
 
                   <div class="aa-single-field">
                     <span class="fa fa-user"></span>
-                    {{form.last_name.label}}
-                    {{form.last_name}}
+                    {{ form.last_name.label_tag }}
+                    {{ form.last_name }}
                   </div>
 
                   <div class="aa-single-field">
                     <span class="fa fa-envelope"></span>
-                    {{form.email.label}}
-                    {{form.email}}
+                    {{ form.email.label_tag }}
+                    {{ form.email }}
                   </div>
+
                   <div class="aa-single-field">
                     <span class="fa fa-user"></span>
-                    {{form.username.label}}
-                    {{form.username}}
+                    {{ form.username.label_tag }}
+                    {{ form.username }}
                   </div>
 
                   <div class="aa-single-field">
                     <span class="fa fa-key"></span>
-                    {{form.password1.label}}
-                    {{form.password1}}
-                  </div>
-                  <div class="aa-single-field">
-                    <span class="fa fa-key"></span>
-                    {{form.password2.label}}
-                    {{form.password2}}
+                    {{ form.password1.label_tag }}
+                    {{ form.password1 }}
                   </div>
 
+                  <div class="aa-single-field">
+                    <span class="fa fa-key"></span>
+                    {{ form.password2.label_tag }}
+                    {{ form.password2 }}
+                  </div>
 
                   <div class="aa-single-submit">
                     <input type="submit" value="Create Account" class="aa-browse-btn" name="submit">
-                    <h3>Already Have an Account? <span><a href="{% url 'accounts:login' %}"
-                          style="text-decoration:underline;">LOGIN
-                          NOW</a></span></h3>
+                    <h3>Already Have an Account?
+                      <span><a href="{% url 'accounts:login' %}" style="text-decoration:underline;">LOGIN NOW</a></span>
+                    </h3>
                   </div>
+                </form>
+                <!-- FORM ENDS -->
 
               </div>
-
-
-              </form>
-
-              <!-- FORM ENDS  -->
             </div>
           </div>
         </div>
-      </div>
       </div>
     </section>
 
