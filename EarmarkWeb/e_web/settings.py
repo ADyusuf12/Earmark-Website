@@ -130,7 +130,7 @@ LOGIN_URL = "accounts:login"
 LOGIN_REDIRECT_URL = "accounts:profile"
 LOGOUT_REDIRECT_URL = "accounts:login"
 REGISTER_URL = "accounts:register"
-REGISTER_REDIRCET_URL = "accounts:profile"
+REGISTER_REDIRECT_URL = "accounts:profile"
 
 # Email configuration
 EMAIL_BACKEND = config('EMAIL_BACKEND')
